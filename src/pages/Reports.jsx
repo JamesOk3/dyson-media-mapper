@@ -1,9 +1,15 @@
+import Breadcrumb from "../ui/Breadcrumb.jsx";
 
 function Reports() {
     return (
-        <div>
-            <h1>Reports Page</h1>
-        </div>
+        <>
+            <Breadcrumb pageName="Reports"/>
+
+            <div>
+                <h1>Reports Page</h1>
+            </div>
+        </>
+
     );
 }
 

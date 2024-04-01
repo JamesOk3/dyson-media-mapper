@@ -1,10 +1,15 @@
+import Breadcrumb from "../ui/Breadcrumb.jsx";
 
 
 function Teams() {
     return (
-        <div>
-            <h1>Teams Page</h1>
-        </div>
+        <>
+            <Breadcrumb pageName="Teams"/>
+            <div>
+                <h1>Teams Page</h1>
+            </div>
+        </>
+
     );
 }
 

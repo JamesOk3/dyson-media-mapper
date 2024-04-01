@@ -10,6 +10,8 @@ Currently, two official plugins are available:
 ## Libraries and Packages
 Frontend Library: React 18.2.0
 Styling: Tailwind CSS 3.4.1
+Error Boundaries (error when rendering components):  react-error-boundary
+Date Picker: npm i flatpickr --save
 
 
 ## Commenting

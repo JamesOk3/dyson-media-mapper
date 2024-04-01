@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import 'additional-styles/flatpickr.css';
 
 @tailwind base;
 @tailwind components;
@@ -33,6 +34,7 @@
 }
 
 /* third-party libraries CSS */
+
 
 .tableCheckbox:checked ~ div span {
   @apply opacity-100;

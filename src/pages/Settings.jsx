@@ -1,10 +1,14 @@
+import Breadcrumb from "../ui/Breadcrumb.jsx";
 
 
 function Settings() {
     return (
-        <div>
-            <h1>Settings Page</h1>
-        </div>
+        <>
+            <Breadcrumb pageName="Settings"/>
+            <div>
+                <h1>Settings Page</h1>
+            </div>
+        </>
     );
 }
 

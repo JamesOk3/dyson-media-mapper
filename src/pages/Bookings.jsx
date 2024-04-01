@@ -1,10 +1,15 @@
+import Breadcrumb from "../ui/Breadcrumb.jsx";
 
 
 function Bookings() {
     return (
-        <div>
-            <h1>Bookings Page</h1>
-        </div>
+        <>
+            <Breadcrumb pageName="Bookings" />
+            <div>
+                <h1>Bookings Page</h1>
+            </div>
+
+        </>
     );
 }
 

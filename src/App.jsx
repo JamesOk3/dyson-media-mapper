@@ -25,6 +25,8 @@ import TeamReports from "./features/reports/TeamReports.jsx";
 import PageTitle from "./ui/PageTitle.jsx";
 import Settings from "./pages/Settings.jsx";
 import Administration from "./features/settings/Administration.jsx";
+import PageNotFound from "./pages/PageNotFound.jsx";
+import Homepage from "./pages/Homepage.jsx";
 
 /**
  * Renders the main application component.
@@ -52,6 +54,7 @@ function App() {
 
             <BrowserRouter>
                 <Routes>
+                    <Route path="/homepage" element={<Homepage />} />
                     <Route element={<AppLayout />} >
                         <Route index element={
                             <>
@@ -87,6 +90,7 @@ function App() {
                         </Route>
 
                     </Route>
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>
