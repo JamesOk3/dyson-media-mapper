@@ -1,9 +1,8 @@
+import EventForm from "./EventForm.jsx";
 
 function AddEvent() {
     return (
-        <div>
-            <h1>AddEvent Page</h1>
-        </div>
+        <EventForm />
     );
 }
 

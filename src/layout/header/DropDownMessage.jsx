@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icons from "../../ui/Icons.jsx";
@@ -6,6 +6,7 @@ import UserOne from '../../images/user/user-01.png';
 import UserTwo from '../../images/user/user-02.png';
 import UserThree from '../../images/user/user-03.png';
 import UserFour from '../../images/user/user-04.png';
+import useClickOutsideEsc from "../../hooks/useClickOutsideEsc.js";
 
 /**
  * Generates a dropdown message component that displays a list of new messages.
@@ -17,41 +18,13 @@ import UserFour from '../../images/user/user-04.png';
  * Copyright (C) 2024 Newcastle University, UK
  */
 const DropdownMessage = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const {dropdownOpen, setDropdownOpen, triggerRef, dropdownRef} = useClickOutsideEsc();
     const [notifying, setNotifying] = useState(true)
 
-    const trigger = useRef(null)
-    const dropdown = useRef(null)
-
-    // close on click outside
-    useEffect(() => {
-        const clickHandler = ({ target }) => {
-            if (!dropdown.current) return
-            if (
-                !dropdownOpen ||
-                dropdown.current.contains(target) ||
-                trigger.current.contains(target)
-            )
-                return
-            setDropdownOpen(false)
-        }
-        document.addEventListener("click", clickHandler)
-        return () => document.removeEventListener("click", clickHandler)
-    })
-
-    // close if the esc key is pressed
-    useEffect(() => {
-        const keyHandler = ({ keyCode }) => {
-            if (!dropdownOpen || keyCode !== 27) return
-            setDropdownOpen(false)
-        }
-        document.addEventListener("keydown", keyHandler)
-        return () => document.removeEventListener("keydown", keyHandler)
-    })
 
     return (
         <li className="relative">
-            <Link ref={trigger}
+            <Link ref={triggerRef}
                 onClick={() => {
                     setNotifying(false)
                     setDropdownOpen(!dropdownOpen)
@@ -67,7 +40,7 @@ const DropdownMessage = () => {
             </Link>
             {/* <!-- Dropdown Start --> */}
             <div
-                ref={dropdown}
+                ref={dropdownRef}
                 onFocus={() => setDropdownOpen(true)}
                 onBlur={() => setDropdownOpen(false)}
                 className={`absolute -right-16 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${

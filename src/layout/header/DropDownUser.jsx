@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import UserOne from "../../images/user/user-01.png"
 import Icons from "../../ui/Icons.jsx";
+import {useLogout} from "../../features/auth/hooks/useLogout.js";
+import {useUser} from "../../features/auth/hooks/useUser.js";
 
 /**
  * Renders a dropdown menu for the user profile.
@@ -14,7 +16,11 @@ import Icons from "../../ui/Icons.jsx";
  * Copyright (C) 2024 Newcastle University, UK
  */
 function DropDownUser (){
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const {logout, isPending} = useLogout();
+    const {user} = useUser();
+    const {firstName} = user?.user_metadata || {};
+
 
     const trigger = useRef(null)
     const dropdown = useRef(null)
@@ -50,7 +56,7 @@ function DropDownUser (){
                 className="flex items-center gap-4"
                 to="#">
                 <span className="hidden text-right lg:block">
-                  <span className="block text-sm font-medium text-black dark:text-white">James Ok</span>
+                  <span className="block text-sm font-medium text-black dark:text-white">{firstName}</span>
                   <span className="block text-xs">Programmer</span>
                 </span>
 
@@ -69,25 +75,25 @@ function DropDownUser (){
                 }`}>
                 <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
                     <li>
-                        <Link to="/profile"
+                        <Link to="account"
                             className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
                             <Icons id="user" width="22" height="22" viewBox="0 0 22 22"/>My Profile
                         </Link>
                     </li>
                     <li>
-                        <Link to="/messages"
+                        <Link to="#"
                             className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
                             <Icons id="contact" width="22" height="22" viewBox="0 0 22 22"/>My Team
                         </Link>
                     </li>
                     <li>
-                        <Link to="/pages/settings"
+                        <Link to="/settings"
                             className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
                             <Icons id="settings" viewBox="0 0 64 64" />Account Settings
                         </Link>
                     </li>
                 </ul>
-                <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+                <button onClick={logout} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
                     <Icons id="logout" width="22" height="22" viewBox="0 0 22 22"/>Log Out
                 </button>
             </div>

@@ -1,4 +1,5 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
+import {Link} from "react-router-dom";
 
 
 function Settings() {
@@ -7,6 +8,7 @@ function Settings() {
             <Breadcrumb pageName="Settings"/>
             <div>
                 <h1>Settings Page</h1>
+                <Link to="/new-password">Reset Password</Link>
             </div>
         </>
     );

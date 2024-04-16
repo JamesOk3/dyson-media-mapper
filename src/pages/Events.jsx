@@ -1,14 +1,15 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
+import {Outlet} from "react-router-dom";
+import Row from "../ui/containers/Row.jsx";
 
 
 function Events() {
     return (
-        <>
+        <Row>
             <Breadcrumb pageName="Events"/>
-            <div>
-                <h1>Events Page</h1>
-            </div>
-        </>
+
+            <Outlet/>
+        </Row>
 
     );
 }

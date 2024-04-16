@@ -8,21 +8,23 @@
  * Date: April 1, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-function FormRow( { label, icon, children} ) {
+function FormRow( { label, id, icon, children, button, error} ) {
     return (
         // <div className="w-full xl:w-1/2">
         <div className="mb-5.5">
-            <label htmlFor={label} className="mb-3 block text-sm font-medium text-black dark:text-white">
+            <label htmlFor={id} className="mb-3 block  font-medium text-black dark:text-white">
                 {label}
             </label>
-            {icon ? (
+            {icon || button ? (
                 <div className="relative">
-                    <span className="absolute left-4.5 top-4">
-                        {icon}
+                    <span className={`absolute ${icon ? 'left-4.5 top-4' : 'right-0'}`}>
+                        {icon} {button}
                     </span>
                     {children}
                 </div>
             ): children}
+
+            {error && <p className="text-sm mt-1 text-rose-500">{error}</p>}
         </div>
     );
 }

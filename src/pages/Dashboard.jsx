@@ -1,10 +1,8 @@
 
+
 function Dashboard() {
     return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
-    );
+        <div>Dashboard</div>
+    )
 }
-
 export default Dashboard;

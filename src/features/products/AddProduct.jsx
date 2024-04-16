@@ -7,6 +7,7 @@ import ProductForm from "./ProductForm.jsx";
  */
 function AddProduct() {
     return (
+
         <ProductForm />
     );
 }

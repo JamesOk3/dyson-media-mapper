@@ -1,6 +1,7 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
-import CreateUser from "../features/users/CreateUser.jsx";
 import Row from "../ui/containers/Row.jsx";
+import UserList from "../features/users/UserList.jsx";
+import {Outlet} from "react-router-dom";
 
 /**
  * A function that renders the Users component.
@@ -16,7 +17,7 @@ function Users() {
     return (
         <Row>
             <Breadcrumb pageName="Users"/>
-            <CreateUser />
+            <Outlet />
         </Row>
 
     );

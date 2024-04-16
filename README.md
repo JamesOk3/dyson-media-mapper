@@ -12,6 +12,10 @@ Frontend Library: React 18.2.0
 Styling: Tailwind CSS 3.4.1
 Error Boundaries (error when rendering components):  react-error-boundary
 Date Picker: npm i flatpickr --save
+npm install react-hot-toast
+npm i react-hook-form
+
+supabase client: npm install @supabase/supabase-js
 
 
 ## Commenting

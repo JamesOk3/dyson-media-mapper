@@ -1,13 +1,12 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
+import {Outlet} from "react-router-dom";
 
 
 function Bookings() {
     return (
         <>
             <Breadcrumb pageName="Bookings" />
-            <div>
-                <h1>Bookings Page</h1>
-            </div>
+            <Outlet />
 
         </>
     );

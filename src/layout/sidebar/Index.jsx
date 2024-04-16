@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react"
-import { NavLink, useLocation } from "react-router-dom"
+import React from "react"
+import {Link, NavLink} from "react-router-dom"
 import SidebarLinkGroup from "./SideBarLinkGroup.jsx";
 import Logo from "../../images/logo/dyson-white.png";
 import Icons from "../../ui/Icons.jsx"
+import useSideBar from "./useSideBar.js";
 
 /**
  * Sidebar component that renders the sidebar and the app's menu links.
@@ -16,65 +17,25 @@ import Icons from "../../ui/Icons.jsx"
  */
 
 function Sidebar ({ sidebarOpen, setSidebarOpen })  {
-    const location = useLocation();
-    const { pathname } = location;
 
-    const trigger = useRef(null);
-    const sidebar = useRef(null);
-
-    const storedSidebarExpanded = localStorage.getItem("sidebar-expanded")
-    const [sidebarExpanded, setSidebarExpanded] = useState(
-        storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
-    )
-
-    // close on click outside
-    useEffect(() => {
-        const clickHandler = ({ target }) => {
-            if (!sidebar.current || !trigger.current) return;
-            if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target)) return;
-            setSidebarOpen(false);
-        }
-        document.addEventListener("click", clickHandler)
-        return () => document.removeEventListener("click", clickHandler)
-    })
-
-    // close if the esc key is pressed
-    useEffect(() => {
-        const keyHandler = ({ keyCode }) => {
-            if (!sidebarOpen || keyCode !== 27) return
-            setSidebarOpen(false)
-        }
-        document.addEventListener("keydown", keyHandler)
-        return () => document.removeEventListener("keydown", keyHandler)
-    })
-
-    // close on route change
-    useEffect(() => {
-        sidebarOpen && setSidebarOpen(false)
-    }, [pathname]);
-
-
-    useEffect(() => {
-        localStorage.setItem("sidebar-expanded", sidebarExpanded.toString())
-        document.querySelector("body")?.classList.toggle("sidebar-expanded", sidebarExpanded);
-
-        /*if (sidebarExpanded) {
-            document.querySelector("body")?.classList.add("sidebar-expanded")
-        } else {
-            document.querySelector("body")?.classList.remove("sidebar-expanded")
-        }*/
-    }, [sidebarExpanded])
+    const {
+        pathname,
+        trigger,
+        sidebar,
+        sidebarExpanded,
+        setSidebarExpanded
+    } = useSideBar({ sidebarOpen, setSidebarOpen });
 
     return (
         <aside ref={sidebar}
-            className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+            className={`absolute left-0 top-0 z-999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}>
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-                <NavLink to="/">
+                <Link to="/">
                     <img className="h-16" src={Logo} alt="Logo" />
-                </NavLink>
+                </Link>
 
                 <button ref={trigger}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -118,7 +79,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                     e.preventDefault()
                                                     sidebarExpanded ? handleClick() : setSidebarExpanded(true)
                                                 }}>
-                                                <Icons id="cart-full" viewBox="0 0 64 64"/> Products
+                                                <Icons id="cart-full" viewBox="0 0 64 64"/> <Link to="/products">Products</Link>
 
                                                 <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
                                                        className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && "rotate-180"}`}
@@ -173,7 +134,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                          e.preventDefault()
                                                          sidebarExpanded ? handleClick() : setSidebarExpanded(true)
                                                      }}>
-                                                <Icons id="calendar"/>Events
+                                                <Icons id="calendar"/><Link to="/events">Events</Link>
 
                                                 <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
                                                        className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && "rotate-180"}`}
@@ -186,7 +147,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                         <NavLink to="/events/calendar"
                                                             className={({isActive}) =>
                                                                 "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
-                                                                (isActive && "!text-white")}>Calender
+                                                                (isActive && "!text-white")}>Calendar
                                                         </NavLink>
                                                     </li>
 
@@ -219,7 +180,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                          e.preventDefault()
                                                          sidebarExpanded ? handleClick() : setSidebarExpanded(true)
                                                      }}>
-                                                <Icons id="booking"/>Bookings
+                                                <Icons id="booking"/><Link to="/bookings">Bookings</Link>
                                                 <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
                                                        className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && "rotate-180"}`}
                                                 />
@@ -296,7 +257,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                          sidebarExpanded ? handleClick() : setSidebarExpanded(true)
                                                      }}>
                                                 <Icons id="bar-chart" width="20" height="20" viewBox="0 0 64 64"/>
-                                                Reports and Analytics
+                                                <Link to="/reports">Reports and Analytics</Link>
                                                 <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
                                                        className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && "rotate-180"}`}
                                                 />
@@ -305,10 +266,10 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                             <div className={`translate transform overflow-hidden ${!open && "hidden"}`}>
                                                 <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                                                     <li>
-                                                        <NavLink to="/reports/events-statistics"
+                                                        <NavLink to="/reports/general-reports"
                                                             className={({isActive}) =>
                                                                 "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
-                                                                (isActive && "!text-white")}>Event Reports
+                                                                (isActive && "!text-white")}>General Reports
                                                         </NavLink>
                                                     </li>
 

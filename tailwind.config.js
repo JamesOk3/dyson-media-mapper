@@ -14,6 +14,9 @@ export default {
       ...defaultTheme.screens,
     },
     extend: {
+      gridTemplateColumns: {
+          '40/15/15/20/10': '40% 15% 15% 20% 10%',
+      },
       colors: {
         current: 'currentColor',
         transparent: 'transparent',

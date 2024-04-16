@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Icons from "../../ui/Icons.jsx";
+import useClickOutsideEsc from "../../hooks/useClickOutsideEsc.js";
 
 /**
  * Renders a dropdown notification component.
@@ -13,42 +14,15 @@ import Icons from "../../ui/Icons.jsx";
  * Copyright (C) 2024 Newcastle University, UK
  */
 function DropDownNotification() {
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const {dropdownOpen, setDropdownOpen, triggerRef, dropdownRef} = useClickOutsideEsc();
     const [notifying, setNotifying] = useState(true)
 
-    const trigger = useRef(null)
-    const dropdown = useRef(null)
-
-    useEffect(() => {
-        const clickHandler = ({ target }) => {
-            if (!dropdown.current) return
-            if (
-                !dropdownOpen ||
-                dropdown.current.contains(target) ||
-                trigger.current.contains(target)
-            )
-                return
-            setDropdownOpen(false)
-        }
-        document.addEventListener("click", clickHandler)
-        return () => document.removeEventListener("click", clickHandler)
-    })
-
-    // close if the esc key is pressed
-    useEffect(() => {
-        const keyHandler = ({ keyCode }) => {
-            if (!dropdownOpen || keyCode !== 27) return
-            setDropdownOpen(false)
-        }
-        document.addEventListener("keydown", keyHandler)
-        return () => document.removeEventListener("keydown", keyHandler)
-    })
 
     return (
         <li className="relative">
             <Link to="#"
                 className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
-                 ref={trigger}
+                 ref={triggerRef}
                 onClick={() => {
                     setNotifying(false)
                     setDropdownOpen(!dropdownOpen)
@@ -62,7 +36,7 @@ function DropDownNotification() {
                 <Icons id="notification" className="fill-current duration-300 ease-in-out" />
             </Link>
 
-            <div ref={dropdown}
+            <div ref={dropdownRef}
                 onFocus={() => setDropdownOpen(true)}
                 onBlur={() => setDropdownOpen(false)}
                 className={`absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${

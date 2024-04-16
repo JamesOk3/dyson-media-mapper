@@ -4,7 +4,7 @@ import DropDownMessage from "./DropDownMessage.jsx";
 import DropDownUser from "./DropDownUser.jsx";
 import DarkModeSwitcher from "./DarkModeSwitcher.jsx";
 import LogoIcon from '../../images/logo/my-dyson-logo.png';
-import Icons from "../../ui/Icons.jsx";
+import {useUser} from "../../features/auth/hooks/useUser.js";
 
 /**
  * The Header component - renders the header component.
@@ -20,8 +20,10 @@ import Icons from "../../ui/Icons.jsx";
  */
 
 function Header({ sidebarOpen, setSidebarOpen }) {
+    const {user} = useUser();
+    const {firstName, lastName} = user?.user_metadata || {};
     return (
-        <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+        <header className="sticky top-0 z-99 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
             <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
                 <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
                     {/* <!-- Hamburger Toggle BTN --> */}
@@ -62,12 +64,13 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                     {/* <!-- Hamburger Toggle BTN --> */}
 
                     <Link className="block flex-shrink-0 lg:hidden" to="/">
-                        <img className="h-6" src={LogoIcon} alt="Logo"/>
+                        <img className="h-7" src={LogoIcon} alt="Logo"/>
                     </Link>
                 </div>
 
                 <div className="hidden sm:block">
-                    <form>
+                    <p>Welcome, {firstName} {lastName}</p>
+                    {/*<form>
                         <div className="relative">
                             <button className="absolute left-0 top-1/2 -translate-y-1/2">
                                 <Icons id="search-icon" width="20" height="20" viewBox="0 0 20 20"/>
@@ -78,7 +81,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                                 className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125"
                             />
                         </div>
-                    </form>
+                    </form>*/}
                 </div>
 
                 <div className="flex items-center gap-3 2xsm:gap-7">
