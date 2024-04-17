@@ -1,9 +1,7 @@
-import React from 'react';
 import Heading from '../../ui/Heading.jsx';
 import FormRow from '../../ui/forms/FormRow.jsx';
 // import FormContainer from '../../ui/forms/FormContainer.jsx';
-
-       /**
+/**
  * A function that renders the Homepage component.
  *
  * @return {JSX.Element} The homepage component which will be  used to display the homepage for the official website 
@@ -32,7 +30,7 @@ import FormRow from '../../ui/forms/FormRow.jsx';
                 <div>
                     <FormRow label="Event ID" />
                     {upcomingEvents.map(event => (
-                        <p key={event.ID}className="text-blue-800">{event.ID}</p>
+                        <p key={event.ID} className="text-blue-800">{event.ID}</p>
                     ))}
                 </div>
                 <div>
@@ -54,8 +52,3 @@ import FormRow from '../../ui/forms/FormRow.jsx';
 
 export default EventList;
     
-//     // const [Event, updateEvents] = useState(upcomingEvents);
-   
-
-//     // useEffect() => {}
-//     // Need to add logic for useeffect to connect to backend, as long as the data in the backend remains empty, this will 

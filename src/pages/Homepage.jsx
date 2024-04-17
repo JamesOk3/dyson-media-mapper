@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import EventList from "../features/events/EventList.jsx";
+import EventList from "../features/events/Eventlist.jsx";
 import Homepagevid from "../features/events/Homepagevid.mp4"; 
 
 /**
