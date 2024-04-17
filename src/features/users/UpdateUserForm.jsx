@@ -20,6 +20,18 @@ import {useState} from "react";
 
 const genders = ['Male', 'Female', 'Other'];
 const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
+
+/**
+ * A component for updating user details.
+ * uses updateUser mutation function to send the submitted data to the backend.
+ *
+ * @return {JSX.Element} The form for updating user details.
+ *
+ * @author James M Kambanga,
+ * Date: April 7, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function UpdateUserForm() {
 
     const {

@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useRef, useState} from "react";
+import {createContext, useContext, useState} from "react";
 import Icons from "../Icons.jsx";
 import {createPortal} from "react-dom";
 
@@ -12,7 +12,6 @@ import {createPortal} from "react-dom";
  * Date: April 4, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-
 
 const buttonStyles = "flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4";
 const MenusContext = createContext();

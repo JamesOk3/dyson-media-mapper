@@ -1,4 +1,14 @@
 
+/**
+ * Generates a Spinner component to show loading state.
+ *
+ * @param {Object} size - The size of the spinner.
+ * @return {JSX.Element} The Spinner component.
+ *
+ * @author James M Kambanga
+ * Date: April 9, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function Spinner({size}) {
     return (
         <div className={`size-${size} flex items-center justify-center  dark:border-strokedark`}>

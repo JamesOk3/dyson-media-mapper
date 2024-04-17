@@ -11,6 +11,17 @@ import {useState} from "react";
 import toast from "react-hot-toast";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 
+/**
+ * Handles the submission of the reset password form for logged-in users.
+ * uses useResetPassword hook to send a request to the backend for password reset.
+ *
+ * @return {component} with a form for users to enter new password.
+ *
+ * @author James M Kambanga,
+ * Date: April 1, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function ResetPassword() {
     const [email, setEmail] = useState("");
 

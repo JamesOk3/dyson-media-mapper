@@ -1,8 +1,20 @@
 import {useDeleteProduct} from "./hooks/useDeleteProduct.js";
-import {useState} from "react";
 import Table from "../../ui/tables/Table.jsx";
 import ProductForm from "./ProductForm.jsx";
 import ActionMenu from "../../ui/modals/ActionMenu.jsx";
+
+/**
+ * Function component for rendering a row in the product table.
+ *
+ * @param {object} product - The product object to display in the row.
+ * @param {object} editProduct - The product object to be edited.
+ * @param {function} setEditProduct - The function to set the product to edit.
+ * @return {JSX.Element} The JSX element representing the product row.
+ *
+ * @author James M Kambanga
+ * Date: April 6, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function ProductRow({product, editProduct, setEditProduct}) {
     const { isDeleting, deleteProduct} = useDeleteProduct();

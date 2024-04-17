@@ -4,13 +4,16 @@ import Modal from "./modals/Modal.jsx";
 import ConfirmDelete from "./modals/ConfirmDelete.jsx";
 
 /**
- * Dropdown component that handles opening and closing of the dropdown menu.
- * (the dropdown provides view, edit, and delete buttons)
+ * Generates a dropdown menu for actions such as viewing, editing, and deleting items.
  *
- * @return {JSX.Element} The dropdown component JSX
+ * @param {function} onDelete - The function to call when deleting an item
+ * @param {function} onEdit - The function to call when editing an item
+ * @param {function} onView - The function to call when viewing an item
+ * @param {string} id - The unique identifier of the item
+ * @return {JSX.Element} The dropdown menu component
  *
  * @author James M Kambanga
- * Date: April 4, 2024,
+ * Date: April 13, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
 function ActionDropDownMenu({onDelete, onEdit, onView, id}) {

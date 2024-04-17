@@ -1,5 +1,18 @@
 import supabase, {supabaseUrl} from "./supabase.js";
 
+/**
+ * Function to add or update a product in the database along with its image.
+ *
+ * @param {object} newProduct - The new product object to be added or updated
+ * @param {string} id - The ID of the existing product to be updated, if any
+ * @return {object} The data of the added or updated product
+ *
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 14, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function addUpdateProduct(newProduct, id) {
 
     const hasImagePath = newProduct.photo?.startsWith?.(supabaseUrl); // check if image path is already in supabase url
@@ -41,7 +54,16 @@ export async function addUpdateProduct(newProduct, id) {
     return data;
 }
 
-
+/**
+ * Retrieves all products from the database.
+ *
+ * @return {Array} Array of product objects
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 14, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 export async function getProducts() {
     const { data, error } = await supabase.from("products").select("*");
@@ -49,6 +71,18 @@ export async function getProducts() {
     if(error) throw new Error("Could not fetch products");
     return data;
 }
+
+/**
+ * Delete a product from the database by ID.
+ *
+ * @param {number} id - The ID of the product to delete
+ * @return {Promise} The data of the deleted product
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 14, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 export async function deleteProduct(id) {
     const { data, error } = await supabase

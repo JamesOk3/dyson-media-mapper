@@ -2,6 +2,15 @@ import Icons from "../Icons.jsx";
 import {errorStyles, styles} from "./FormInputs.jsx";
 import {useForm} from "react-hook-form";
 
+/**
+ * A function component for a search bar.
+ *
+ * @return {JSX.Element} The search bar component.
+ *
+ * @author James M Kambanga
+ * Date: April 5, 2024,
+ *
+ */
 function MinSearchBar() {
     const {register, handleSubmit, formState} = useForm();
     const {errors} = formState;

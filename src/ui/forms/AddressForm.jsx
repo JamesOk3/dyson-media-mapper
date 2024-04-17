@@ -6,6 +6,19 @@ import Icons from "../Icons.jsx";
 import Heading from "../Heading.jsx";
 
 const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
+
+/**
+ * Generates an address form with fields for address, postcode, city, and country.
+ *
+ * @param {object} register - The registration function to register form data with React Hook Form
+ * @param {object} errors - Object containing error messages for form fields
+ * @param {string} title - Optional title for the address form
+ * @return {JSX.Element} The JSX element representing the address form
+ *
+ * @author James M Kambanga
+ * Date: April 5, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function AddressForm({register, errors, title}) {
     return (
         <div>

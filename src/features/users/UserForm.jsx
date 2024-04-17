@@ -28,7 +28,7 @@ const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
 /**
  * Renders a form for registering a new user
  *
- * @return {JSX.Element} The form JSX for adding a new product.
+ * @return {JSX.Element} The form JSX for adding a new user.
  *
  * @author James M Kambanga
  * Date: April 1, 2024,
@@ -39,8 +39,9 @@ function UserForm() {
     const [phoneInput, setPhoneInput] = useState("");
     const navigate = useNavigate();
 
-    const {register, handleSubmit, formState, getValues, control, reset} = useForm();
+    const {register, handleSubmit, formState, getValues, control, reset, watch} = useForm();
     const {errors} = formState;
+
     function onSubmit({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country}) {
         createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country},
             {
@@ -53,8 +54,8 @@ function UserForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <GridContainer col="5" gap="2">
-                <GridItem className="col-span-5 xl:col-span-3">
+           {/* <GridContainer col="5" gap="2">
+                <GridItem className="col-span-5 xl:col-span-3">*/}
                     <GeneralContainer>
                         <Heading title="Create User"/>
                         <FlexContainer>
@@ -193,9 +194,19 @@ function UserForm() {
                             />
                         </FormRow>
 
+                        <ButtonGroup>
+                            <Button type="reset" variation="secondary" size="small" disabled={isPending}
+                                    onClick={() => navigate("/users", {replace: true})}>
+                                Cancel
+                            </Button>
+                            <Button type="submit" variation="primary" size="small">
+                                {isPending ? <SpinnerMin label="loading..."/> : 'Save'}
+                            </Button>
+                        </ButtonGroup>
+
                     </GeneralContainer>
-                </GridItem>
-{/* Profile Photo Upload Form*/}
+               {/* </GridItem>
+ Profile Photo Upload Form
                 <GridItem className="col-span-5 xl:col-span-2">
                     <GeneralContainer>
                         <Heading title="Profile Photo"/>
@@ -219,7 +230,7 @@ function UserForm() {
 
                     </GeneralContainer>
                 </GridItem>
-            </GridContainer>
+            </GridContainer>*/}
         </form>
 
     );

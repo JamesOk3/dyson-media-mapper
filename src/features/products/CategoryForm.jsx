@@ -7,6 +7,17 @@ import {useEditCategory} from "./hooks/useEditCategory.js";
 import {useAddCategory} from "./hooks/useAddCategory.js";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 
+/**
+ * Handles the form submission for category creation or editing.
+ *
+ * @param {Object} category - data to be edited.
+ * @param {function} setEditCategory - function to set the category to be edited.
+ * @return {component} a form for adding or editing categories.
+ *
+ * @author James M Kambanga
+ * Date: April 6, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function CategoryForm({ category = {}, setEditCategory}) {
     const { id: categoryId, ...categoryValues } = category

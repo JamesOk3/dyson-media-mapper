@@ -4,13 +4,13 @@ import {addUpdatePickupLocation} from "../../../services/apiPickupLocations.js";
 
 /**
  * Custom React hook for adding a pickup location.
+ * uses addUpdatePickupLocation function to send data to the backend through REST API.
  *
- * @param {function} addUpdatePickupLocation - Function to add or update a pickup location to the database
  * @return {Object} Object containing the processing state (isAdding)
  * and mutation function to be executed (addPickupLocation)
  *
  * @author James M Kambanga
- * Date: April 14, 2024,
+ * Date: April 4, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
 

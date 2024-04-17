@@ -6,7 +6,7 @@
  * @return {JSX.Element} - A div element displaying the children.
  *
  * @author James M Kambanga
- * Date: April, 2024,
+ * Date: April 2, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
 function Row({children}) {

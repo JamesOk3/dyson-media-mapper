@@ -8,7 +8,7 @@ import spritesWithStyles from "../../assets/spritesWithStyles.svg";
  * @return {JSX.Element} The rendered SVG element.
  *
  * @author James M Kambanga
- * Date: March 27, 2024,
+ * Date: April 5, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
 function ModalIcons({ id, ...props }) {

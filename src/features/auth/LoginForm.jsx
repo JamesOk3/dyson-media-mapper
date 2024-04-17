@@ -7,6 +7,15 @@ import {useState} from "react";
 import {useLogin} from "./hooks/useLogin.js";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 
+/**
+ * A component that renders the login form.
+ *
+ * @return {JSX.Element} The login form for users to enter their email and password.
+ *
+ * @author James M Kambanga
+ * Date: April 1, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')

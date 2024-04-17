@@ -1,5 +1,29 @@
 import supabase, {supabaseUrl} from "./supabase.js";
 
+/**
+ * Function to create a new user with the provided information and update the database.
+ *
+ * @param {String} firstName - The first name of the user.
+ * @param {String} lastName - The last name of the user.
+ * @param {String} email - The email of the user.
+ * @param {String} password - The password of the user.
+ * @param {String} phoneNumber - The phone number of the user.
+ * @param {String} dob - The date of birth of the user.
+ * @param {String} gender - The gender of the user.
+ * @param {String} address - The address of the user.
+ * @param {String} city - The city of the user.
+ * @param {String} postcode - The postcode of the user.
+ * @param {String} country - The country of the user.
+ * @return {String} The data of the newly created user.
+ *
+ * @throws {Error} If the operation fails
+ * @returns {Promise<Object>} The newly created user
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 export async function createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country})
 {
 
@@ -17,7 +41,7 @@ export async function createUser({firstName, lastName, email, password, phoneNum
                 city,
                 postcode,
                 country,
-                avatar: ""
+                avatar: "",
             },
             emailRedirectTo: "http://localhost:5173/new-password"
         }
@@ -29,6 +53,18 @@ export async function createUser({firstName, lastName, email, password, phoneNum
     return data;
 }
 
+/**
+ * Function to log in with email and password.
+ *
+ * @param {Object} email - the email of the user
+ * @param {Object} password - the password of the user
+ * @return {Promise<Object>} the data object containing user information
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function login({email, password}) {
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -41,6 +77,16 @@ export async function login({email, password}) {
     return data;
 }
 
+/**
+ * Retrieves the current user by fetching the session and user data from Supabase.
+ *
+ * @return {Object} The current user data if available, otherwise null.
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getCurrentUser() {
     const {data: session } = await supabase.auth.getSession();
     if (!session.session) return null;
@@ -51,6 +97,17 @@ export async function getCurrentUser() {
     return data?.user;
 }
 
+/**
+ * Reset a user's password using the provided email address.
+ *
+ * @param {string} email - The email address of the user.
+ * @return {Promise} The data of the password reset operation.
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function resetPassword({email}) {
     let { data, error } = await supabase.auth.resetPasswordForEmail(email,
         { redirectTo: "http://localhost:5173/new-password" }
@@ -59,16 +116,34 @@ export async function resetPassword({email}) {
     return data;
 }
 
+/**
+ * Retrieves all users from the 'profiles' table.
+ *
+ * @return {Array} An array of user profiles.
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getAllUsers() {
-
     const { data, error } = await supabase
-        .from('auth.users')
+        .from('profiles')
         .select('*')
     if(error) throw new Error("Could not fetch users");
-    console.log(data);
     return data;
 }
 
+/**
+ * Update user information including password, first name, last name, phone number, date of birth, gender, address, city, postcode, country, and avatar.
+ *
+ * @return {object} The updated user information.
+ * @throws {Error} If the operation fails
+ *
+ * @author James M Kambanga
+ * Date: April 10, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function updateUser({password,firstName, lastName, phoneNumber, dob, gender, address, city, postcode, country, avatar})
 {
     // Update user
@@ -113,6 +188,11 @@ export async function updateUser({password,firstName, lastName, phoneNumber, dob
     return updateUser;
 }
 
+/**
+ * Logs the user out by signing them out of the authentication system.
+ *
+ * @throws {Error} If the operation fails
+ */
 export async function logout() {
     const { error } = await supabase.auth.signOut();
     if(error) throw new Error(error.message);

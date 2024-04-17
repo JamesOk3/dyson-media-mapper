@@ -12,7 +12,7 @@ import Icons from "../Icons.jsx";
  * Date: April 1, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-function DatePicker({id, name, children, register}) {
+function DatePicker({id, name, register}) {
 
     useEffect(() => {
         // Init flatpickr

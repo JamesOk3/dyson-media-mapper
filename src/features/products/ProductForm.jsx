@@ -18,9 +18,11 @@ import {useNavigate} from "react-router-dom";
 
 
 /**
- * Renders a form for adding a new product
+ * Function for handling form submission of product data.
  *
- * @return {JSX.Element} The form JSX for adding a new product.
+ *  @param {Object} data - The data for the product to be edited.
+ *  @param {function} setEditProduct - The function to set the product to be edited.
+ *  @return {component} contains a form for adding or editing products.
  *
  * @author James M Kambanga
  * Date: March 31, 2024,

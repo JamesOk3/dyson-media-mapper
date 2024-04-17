@@ -7,6 +7,10 @@ import {deletePickupLocation as deletePickupLocationApi} from "../../../services
  *
  * @param {function} - Function to delete pickup location from database
  * @return {object} Object containing information about deletion status and function to delete location
+ *
+ * @author James M Kambanga
+ * Date: April 4, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
  */
 export function useDeletePickupLocation() {
     const queryClient = useQueryClient();
