@@ -36,6 +36,7 @@ import ResetPassword from "./features/auth/ResetPassword.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 
+
 /**
  * Renders the main application component.
  * Provide routes to all parts of the application.
@@ -111,6 +112,7 @@ function App() {
                     <Route path="/new-password" element={<NewPassword />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="*" element={<PageNotFound />} />
+                    
                 </Routes>
 
                 <Toaster position="top-center"
