@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from '../../ui/Heading.jsx';
 import FormRow from '../../ui/forms/FormRow.jsx';
-import FormContainer from '../../ui/forms/FormContainer.jsx';
+// import FormContainer from '../../ui/forms/FormContainer.jsx';
 
        /**
  * A function that renders the Homepage component.
@@ -25,7 +25,7 @@ import FormContainer from '../../ui/forms/FormContainer.jsx';
 
     
     return (
-        <FormContainer className="max-w-4xl mx-auto">
+        <div className="p-7 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark max-w-4xl mx-auto">
            
             <Heading title="Upcoming Events" />
             <div className="grid grid-cols-3 gap-4">
@@ -48,7 +48,7 @@ import FormContainer from '../../ui/forms/FormContainer.jsx';
                     ))}
                 </div>
             </div>
-        </FormContainer>
+        </div>
     );
 }
 
