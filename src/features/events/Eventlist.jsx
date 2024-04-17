@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Heading from '../../ui/Heading.jsx';
+import FormRow from '../../ui/forms/FormRow.jsx';
+import FormContainer from '../../ui/forms/FormContainer.jsx';
 
-/**
+       /**
  * A function that renders the Homepage component.
  *
- * @return {JSX.Element} The eventList component which will be used in the Homepage Component
+ * @return {JSX.Element} The homepage component which will be  used to display the homepage for the official website 
  *
  * @author Hiruy Alemseged
  * Date: April 7, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
 
-function Eventlist() {
-    // Sample events to be shown on screen, once data is updated in backend it will update this list of events 
-    
+       function EventList() {
     const upcomingEvents = [
         { ID: "DYS29874", Event: "Dyson Product Fair", Date: "03/04/2024" },
         { ID: "DYS89373", Event: "Newcastle University", Date: "14/04/2024" },
@@ -21,25 +22,40 @@ function Eventlist() {
         { ID: "DYS18273", Event: "Blackpool Product Fair", Date: "23/04/2024" },
         { ID: "DYS92389", Event: "Bristol Exhibition", Date: "06/05/2024" }
     ];
+
     
-    const [Event, updateEvents] = useState(upcomingEvents);
-   
-
-    // useEffect() => {}
-    // Need to add logic for useeffect to connect to backend, as long as the data in the backend remains empty, this will 
-
-     return (
-        <div class="rounded-xl h-16 w-24 flex bg-teal-400 m-2">
-            <h2> Upcoming Events </h2>
-            <ul>
-                {UpcomingEvents.map(event => (
-                    <li key={event.ID}>
-                        {event.Event} - {event.Date}
-                    </li>
-                ))}
-            </ul>
-        </div>
+    return (
+        <FormContainer className="max-w-4xl mx-auto">
+           
+            <Heading title="Upcoming Events" />
+            <div className="grid grid-cols-3 gap-4">
+                <div>
+                    <FormRow label="Event ID" />
+                    {upcomingEvents.map(event => (
+                        <p key={event.ID}className="text-blue-800">{event.ID}</p>
+                    ))}
+                </div>
+                <div>
+                    <FormRow label="Event Name" />
+                    {upcomingEvents.map(event => (
+                        <p key={event.ID}  >{event.Event}</p>
+                    ))}
+                </div>
+                <div>
+                    <FormRow label="Event Date" />
+                    {upcomingEvents.map(event => (
+                        <p key={event.ID} >{event.Date}</p>
+                    ))}
+                </div>
+            </div>
+        </FormContainer>
     );
 }
 
-export default eventList; 
+export default EventList;
+    
+//     // const [Event, updateEvents] = useState(upcomingEvents);
+   
+
+//     // useEffect() => {}
+//     // Need to add logic for useeffect to connect to backend, as long as the data in the backend remains empty, this will 
