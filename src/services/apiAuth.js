@@ -14,7 +14,7 @@ import supabase, {supabaseUrl} from "./supabase.js";
  * @param {String} city - The city of the user.
  * @param {String} postcode - The postcode of the user.
  * @param {String} country - The country of the user.
- * @return {String} The data of the newly created user.
+ * @param {String} role - The user role in the system.
  *
  * @throws {Error} If the operation fails
  * @returns {Promise<Object>} The newly created user
@@ -24,7 +24,7 @@ import supabase, {supabaseUrl} from "./supabase.js";
  * Copyright (C) 2024 Newcastle University, UK
  */
 
-export async function createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country})
+export async function createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role})
 {
 
     const { data, error } = await supabase.auth.signUp({
@@ -41,6 +41,7 @@ export async function createUser({firstName, lastName, email, password, phoneNum
                 city,
                 postcode,
                 country,
+                role,
                 avatar: "",
             },
             emailRedirectTo: "http://localhost:5173/new-password"
@@ -135,7 +136,8 @@ export async function getAllUsers() {
 }
 
 /**
- * Update user information including password, first name, last name, phone number, date of birth, gender, address, city, postcode, country, and avatar.
+ * Update user information including password, first name, last name, phone number, date of birth,
+ * gender, address, city, postcode, country, and avatar.
  *
  * @return {object} The updated user information.
  * @throws {Error} If the operation fails

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
-import UserOne from "../../images/user/user-01.png"
 import Icons from "../../ui/Icons.jsx";
 import {useLogout} from "../../features/auth/hooks/useLogout.js";
 import {useUser} from "../../features/auth/hooks/useUser.js";
+import defaultUser from "../../images/user/default-user.jpeg";
 
 /**
  * Renders a dropdown menu for the user profile.
@@ -19,8 +19,9 @@ function DropDownUser (){
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const {logout, isPending} = useLogout();
     const {user} = useUser();
-    const {firstName} = user?.user_metadata || {};
+    const {firstName, role, avatar} = user?.user_metadata || {};
 
+    console.log(avatar);
 
     const trigger = useRef(null)
     const dropdown = useRef(null)
@@ -57,11 +58,13 @@ function DropDownUser (){
                 to="#">
                 <span className="hidden text-right lg:block">
                   <span className="block text-sm font-medium text-black dark:text-white">{firstName}</span>
-                  <span className="block text-xs">Programmer</span>
+                  <span className="block text-xs">{role}</span>
                 </span>
 
                 <span className="h-12 w-12 rounded-full">
-                  <img src={UserOne} alt="User" />
+                  <img src={avatar} alt="User image"
+                       onError={e => e.target.src = defaultUser}
+                  />
                 </span>
                 <Icons className="hidden fill-current sm:block" id="chevron-down" width="12" height="8" viewBox="0 0 12 8"/>
 

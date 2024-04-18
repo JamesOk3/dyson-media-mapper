@@ -24,7 +24,6 @@ import Empty from "../../ui/Empty.jsx";
 function UserList() {
     const navigate = useNavigate()
     const {isFetching, users } = useGetAllUsers();
-    console.log(users);
 
     const handleClick = () => {
         navigate("/users/create-user", {replace: true});

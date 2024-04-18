@@ -70,7 +70,7 @@ function Row({children}) {
     // const {cols, xlCols, smCols} = useContext(TableContext);
     return (
         // <div role="row" className={`grid grid-cols-${cols} rounded-sm hover:bg-gray-2 dark:bg-meta-4 sm:grid-cols-${smCols} xl:grid-cols-${xlCols} border-b border-stroke dark:border-strokedark`}>
-        <div role="row" className={`grid grid-cols-[75%_25%] rounded-sm hover:bg-gray-2 dark:bg-meta-4 border-b border-stroke dark:border-strokedark sm:grid-cols-[40%_20%_25%_15%] xl:grid-cols-[30%_25%_15%_20%_10%]`}>
+        <div role="row" className={`grid grid-cols-[75%_25%] rounded-sm hover:bg-gray-2 dark:bg-meta-4 border-b border-stroke dark:border-strokedark sm:grid-cols-[40%_20%_25%_15%] xl:grid-cols-[30%_25%_15%_20%_10%] items-center`}>
             {children}
         </div>
     )

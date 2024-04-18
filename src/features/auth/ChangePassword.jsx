@@ -76,9 +76,11 @@ function ChangePassword() {
                                    })}/>
                         </FormRow>
 
-                        <Button type="submit" variation="primary" size="small" disabled={isUpdating}>
-                            {isUpdating ?  <SpinnerMin label='Updating...'/> : "Update Password"}
-                        </Button>
+                        <div className="flex justify-end">
+                            <Button type="submit" variation="primary" size="small" disabled={isUpdating}>
+                                {isUpdating ?  <SpinnerMin label='Updating...'/> : "Update Password"}
+                            </Button>
+                        </div>
 
                     </form>
                 </div>

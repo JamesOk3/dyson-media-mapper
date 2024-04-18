@@ -41,8 +41,6 @@ function UpdateUserForm() {
         }
     } = useUser()
 
-    console.log(user_metadata)
-
     const {register, handleSubmit, formState: {errors}, watch, control} = useForm({
         defaultValues: {
             email,
@@ -208,6 +206,7 @@ function UpdateUserForm() {
                                        {...register("avatar")}/>
                             </PhotoFileInput>
                         </FormRow>
+
                         <Button type="submit" variation="primary" size="large">
                             {isUpdating ? <SpinnerMin label="Updating..."/> : 'Update Details'}
                         </Button>
