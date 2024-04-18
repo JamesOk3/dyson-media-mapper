@@ -1,5 +1,15 @@
 import Icons from "../Icons.jsx";
 
+/**
+ * Renders a search bar component with children elements.
+ *
+ * @param {Object} children - The child elements to be rendered inside the search bar.
+ * @return {JSX.Element} The rendered search bar component.
+ *
+ * @author James M Kambanga
+ * Date: April 5, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function SearchBar({children}) {
     return (
         <div className="hidden sm:block">

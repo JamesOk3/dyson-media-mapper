@@ -2,13 +2,15 @@ import {useNavigate} from "react-router-dom";
 
 import Heading from "../../ui/Heading.jsx";
 
-import {users} from "../../assets/data/uers.js";
+// import {users} from "../../assets/data/uers.js";
 import GeneralContainer from "../../ui/containers/GeneralContainer.jsx";
 import {ButtonGroup, AddButton} from "../../ui/buttons/Button.jsx";
 import MinSearchBar from "../../ui/forms/MinSearchBar.jsx";
 import Table from "../../ui/tables/Table.jsx";
 import UserRow from "./UserRow.jsx";
 import {useGetAllUsers} from "../auth/hooks/useGetAllUsers.js";
+import Spinner from "../../ui/spinners/Spinner.jsx";
+import Empty from "../../ui/Empty.jsx";
 
 /**
  * Renders a table component displaying a list of users.
@@ -21,11 +23,14 @@ import {useGetAllUsers} from "../auth/hooks/useGetAllUsers.js";
  */
 function UserList() {
     const navigate = useNavigate()
-    const {isFetching, users: data } = useGetAllUsers();
-    console.log(data);
+    const {isFetching, users } = useGetAllUsers();
+
     const handleClick = () => {
         navigate("/users/create-user", {replace: true});
     }
+    if (isFetching) return <Spinner />
+    if (!users.length) return <Empty resourceName="users" />
+
     return (
         <GeneralContainer >
             <ButtonGroup>

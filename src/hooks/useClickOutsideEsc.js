@@ -1,5 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 
+/**
+ * Generate a custom hook to handle closing dropdown context menu on click outside or pressing the escape key.
+ *
+ * @return {Object} Object containing dropdown state, setter function, and refs for trigger and dropdown elements
+ *
+ * @author James M Kambanga
+ * Date: April 8, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function useClickOutsideEsc() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const triggerRef = useRef(null);

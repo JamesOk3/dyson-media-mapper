@@ -3,6 +3,16 @@ import Spinner from "./spinners/Spinner.jsx";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
+/**
+ * Load the authenticated user and redirect to login if not authenticated.
+ *
+ * @param {Object} children - The components to render if authenticated.
+ * @return {JSX.Element} The rendered components.
+ *
+ * @author James M Kambanga
+ * Date: April 16, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function ProtectedRoute({children}) {
     const navigate = useNavigate();
 

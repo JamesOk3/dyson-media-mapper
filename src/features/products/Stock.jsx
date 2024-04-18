@@ -11,12 +11,21 @@ import Table from "../../ui/tables/Table.jsx";
 import ProductRow from "./ProductRow.jsx";
 import {useState} from "react";
 
+/**
+ * Function component for displaying the list of products.
+ *
+ * @return {JSX.Element} Stock component with product table and actions
+ *
+ * @author James M Kambanga
+ * Date: April 6, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function Stock() {
     const [editProduct, setEditProduct] = useState("");
     const navigate = useNavigate();
 
-    const {isFetchingProducts, products, error} = useGetProducts();
+    const {isFetchingProducts, products} = useGetProducts();
 
     if (isFetchingProducts) return <Spinner size="13"/>
 

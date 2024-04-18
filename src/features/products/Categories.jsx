@@ -10,6 +10,16 @@ import {useDeleteCategory} from "./hooks/useDeleteCategory.js";
 import {useState} from "react";
 import Spinner from "../../ui/spinners/Spinner.jsx";
 
+/**
+ * Component for displaying and managing product categories.
+ * creates a list of category items with a delete and edit button
+ *
+ * @return {JSX.Element} The JSX for the Categories component.
+ *
+ * @author James M Kambanga
+ * Date: April 6, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function Categories() {
     const {isFetchingCategories, categories } = useGetCategories();
 

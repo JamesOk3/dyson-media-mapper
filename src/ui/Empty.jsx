@@ -1,3 +1,14 @@
+
+/**
+ * Generate an empty state component with a message indicating that no {resourceName} could be found.
+ *
+ * @param {object} resourceName - The name of the resource to be displayed in the message
+ * @return {JSX.Element} The empty state component
+ *
+ * @author James M Kambanga
+ * Date: April 13, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function Empty({resourceName}) {
     return (
         <div >

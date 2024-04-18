@@ -11,6 +11,18 @@ import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 
+/**
+ * Function for creating a new password for a new user who logins for the first time.
+ * Handles form submission to update user password and navigate to login page on success.
+ * uses useUpdateUser hook to update user record with new password.
+ *
+ * @return {component} with a form for users to enter new password.
+ *
+ * @author James M Kambanga,
+ * Date: April 1, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function NewPassword() {
     const {register, handleSubmit, getValues, formState} = useForm();
     const {errors} = formState;

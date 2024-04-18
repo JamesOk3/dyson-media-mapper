@@ -6,6 +6,19 @@ import {useForm} from "react-hook-form";
 import {useAddPickupLocation} from "./hooks/useAddPickupLocation.js";
 import {useEditPickupLocation} from "./hooks/useEditPickupLocation.js";
 
+/**
+ * Handles form submission for adding or editing pickup locations.
+ *
+ * @param {Object} location - The data fetched from API to be edited.
+ * @param {function} setEditLocation - The function to set the location item to be edited.
+ * @param {function} onCloseModal - The function to close the popup modal form for adding a new location.
+ * @return {component} a form for adding or editing pickup locations.
+ *
+ * @author James M Kambanga
+ * Date: April 4, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function PickupLocationsForm({location = {}, setEditLocation, onCloseModal}) {
     const {id: locationId, ...locationValues} = location;
     const isEditSession = Boolean(locationId);

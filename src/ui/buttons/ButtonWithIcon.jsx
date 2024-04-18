@@ -2,7 +2,20 @@ import Icons from "../Icons.jsx";
 import Modal from "../modals/Modal.jsx";
 import ConfirmDelete from "../modals/ConfirmDelete.jsx";
 
-/*Make this more reusable*/
+/**
+ * Renders a button component with an icon based on the type provided.
+ *
+ * @param {string} type - The type of button (view, edit, delete, add).
+ * @param {string} name - The name to display on the button.
+ * @param {string} id - The unique identifier of the button.
+ * @param {string} resourceName - The name of the resource tied to the button.
+ * @param {function} onClick - The function to execute on button click.
+ * @return {JSX.Element} The button component with the specified type and icon.
+ *
+ * @author James M Kambanga
+ * Date: March 30, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function ButtonWithIcon({type, name, id, resourceName, onClick}) {
     const btnStyles = "btn dark:bg-slate-800 hover:border-primary  border-slate-200 dark:border-slate-700 dark:hover:border-slate-600";

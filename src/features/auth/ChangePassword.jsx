@@ -1,7 +1,6 @@
 import GeneralContainer from "../../ui/containers/GeneralContainer.jsx";
 import Icons from "../../ui/Icons.jsx";
 import {Button} from "../../ui/buttons/Button.jsx";
-import Row from "../../ui/containers/Row.jsx";
 import Heading from "../../ui/Heading.jsx";
 import {styles} from "../../ui/forms/FormInputs.jsx";
 import FormRow from "../../ui/forms/FormRow.jsx";
@@ -9,6 +8,17 @@ import {useForm} from "react-hook-form";
 import {useUpdateUser} from "./hooks/useUpdateUser.js";
 import toast from "react-hot-toast";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
+
+/**
+ * A functional component to enable users to update their password.
+ * uses updateUser function to send the submitted data to the backend .
+ *
+ * @return {component} with a form for users to enter new password.
+ *
+ * @author James M Kambanga,
+ * Date: April 1, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function ChangePassword() {
     const {register, handleSubmit, getValues, formState, reset} = useForm();
@@ -66,9 +76,11 @@ function ChangePassword() {
                                    })}/>
                         </FormRow>
 
-                        <Button type="submit" variation="primary" size="small" disabled={isUpdating}>
-                            {isUpdating ?  <SpinnerMin label='Updating...'/> : "Update Password"}
-                        </Button>
+                        <div className="flex justify-end">
+                            <Button type="submit" variation="primary" size="small" disabled={isUpdating}>
+                                {isUpdating ?  <SpinnerMin label='Updating...'/> : "Update Password"}
+                            </Button>
+                        </div>
 
                     </form>
                 </div>

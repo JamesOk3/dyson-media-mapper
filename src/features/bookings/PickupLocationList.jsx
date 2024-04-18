@@ -12,6 +12,16 @@ import Empty from "../../ui/Empty.jsx";
 import PickupLocationRow from "./PickupLocationRow.jsx";
 import {useState} from "react";
 
+/**
+ * Generates a list of pickup locations with the hooks to manage
+ * adding, editing, and viewing location details.
+ *
+ * @return {JSX.Element} The JSX element displaying the list of pickup locations.
+ *
+ * @author James M Kambanga
+ * Date: April 4, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function PickupLocationList() {
     const [editLocation, setEditLocation] = useState("");

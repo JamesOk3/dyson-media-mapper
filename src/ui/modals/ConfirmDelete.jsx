@@ -1,5 +1,18 @@
 import ModalIcons from "./ModalIcons.jsx";
 
+/**
+ * Renders a confirmation modal for deleting a specific resource.
+ *
+ * @param {string} resourceName - The name of the resource to be deleted.
+ * @param {function} onConfirm - The function to call when deletion is confirmed.
+ * @param {function} onCloseModal - The function to call when the modal is closed.
+ * @param {string} id - The unique identifier of the resource to be deleted.
+ * @return {JSX.Element} The JSX element representing the confirmation modal.
+ *
+ * @author James M Kambanga
+ * Date: April 9, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function ConfirmDelete({ resourceName, onConfirm, onCloseModal, id }) {
     return (

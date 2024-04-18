@@ -20,6 +20,18 @@ import {useState} from "react";
 
 const genders = ['Male', 'Female', 'Other'];
 const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
+
+/**
+ * A component for updating user details.
+ * uses updateUser mutation function to send the submitted data to the backend.
+ *
+ * @return {JSX.Element} The form for updating user details.
+ *
+ * @author James M Kambanga,
+ * Date: April 7, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 function UpdateUserForm() {
 
     const {
@@ -28,8 +40,6 @@ function UpdateUserForm() {
             user_metadata
         }
     } = useUser()
-
-    console.log(user_metadata)
 
     const {register, handleSubmit, formState: {errors}, watch, control} = useForm({
         defaultValues: {
@@ -196,6 +206,7 @@ function UpdateUserForm() {
                                        {...register("avatar")}/>
                             </PhotoFileInput>
                         </FormRow>
+
                         <Button type="submit" variation="primary" size="large">
                             {isUpdating ? <SpinnerMin label="Updating..."/> : 'Update Details'}
                         </Button>

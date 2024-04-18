@@ -5,13 +5,11 @@ import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
 import {isValidPhoneNumber} from "react-phone-number-input";
 
-import GridContainer from "../../ui/containers/GridContainer.jsx";
-import GridItem from "../../ui/containers/GridItem.jsx";
 import GeneralContainer from "../../ui/containers/GeneralContainer.jsx";
 import Heading from "../../ui/Heading.jsx";
 import FormRow from "../../ui/forms/FormRow.jsx";
 import Icons from "../../ui/Icons.jsx";
-import {styles, PhotoFileInput, SelectWithIcon, selectStyles} from "../../ui/forms/FormInputs.jsx";
+import {styles, SelectWithIcon, selectStyles} from "../../ui/forms/FormInputs.jsx";
 import {Button, ButtonGroup} from "../../ui/buttons/Button.jsx";
 import FlexContainer from "../../ui/containers/FlexContainer.jsx";
 import FlexItem from "../../ui/containers/FlexItem.jsx";
@@ -19,6 +17,7 @@ import DatePicker from "../../ui/forms/DatePicker.jsx";
 import {useCreateUser} from "../auth/hooks/useCreateUser.js";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 import {useNavigate} from "react-router-dom";
+import {useRoles} from "./hooks/useRoles.js";
 
 
 const genders = ['Male', 'Female', 'Other'];
@@ -28,7 +27,7 @@ const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
 /**
  * Renders a form for registering a new user
  *
- * @return {JSX.Element} The form JSX for adding a new product.
+ * @return {JSX.Element} The form JSX for adding a new user.
  *
  * @author James M Kambanga
  * Date: April 1, 2024,
@@ -39,10 +38,13 @@ function UserForm() {
     const [phoneInput, setPhoneInput] = useState("");
     const navigate = useNavigate();
 
-    const {register, handleSubmit, formState, getValues, control, reset} = useForm();
+    const {register, handleSubmit, formState, control, reset} = useForm();
     const {errors} = formState;
-    function onSubmit({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country}) {
-        createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country},
+
+    const { roles } = useRoles();
+
+    function onSubmit({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role}) {
+        createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role},
             {
                 onSuccess: () => {
                     reset();
@@ -53,33 +55,34 @@ function UserForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <GridContainer col="5" gap="2">
-                <GridItem className="col-span-5 xl:col-span-3">
-                    <GeneralContainer>
-                        <Heading title="Create User"/>
-                        <FlexContainer>
-                            <FlexItem>
-                                <FormRow label="First Name" id="firstName" error={errors.firstName?.message}
-                                         icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
-                                    <input type="text" name="firstName" id="firstName" placeholder="e.g., James"
-                                           disabled={isPending}
-                                           className={`${errors.firstName ? 'border-rose-300' : ''} ${styles}`}
-                                           {...register("firstName", {required: "This field is required"})}
-                                    />
-                                </FormRow>
-                            </FlexItem>
-                            <FlexItem>
-                                <FormRow label="Last Name" id="lastName" error={errors.lastName?.message}
-                                         icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
-                                    <input type="text" name="lastName" id="lastName" placeholder="e.g., Smith"
-                                           disabled={isPending}
-                                           className={`${errors.lastName ? 'border-rose-300' : ''} ${styles}`}
-                                           {...register("lastName", {required: "This field is required"})}
-                                    />
-                                </FormRow>
-                            </FlexItem>
-                        </FlexContainer>
 
+            <GeneralContainer>
+                <Heading title="Create User"/>
+                <FlexContainer>
+                    <FlexItem>
+                        <FormRow label="First Name" id="firstName" error={errors.firstName?.message}
+                                 icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
+                            <input type="text" name="firstName" id="firstName" placeholder="e.g., James"
+                                   disabled={isPending}
+                                   className={`${errors.firstName ? 'border-rose-300' : ''} ${styles}`}
+                                   {...register("firstName", {required: "This field is required"})}
+                            />
+                        </FormRow>
+                    </FlexItem>
+                    <FlexItem>
+                        <FormRow label="Last Name" id="lastName" error={errors.lastName?.message}
+                                 icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
+                            <input type="text" name="lastName" id="lastName" placeholder="e.g., Smith"
+                                   disabled={isPending}
+                                   className={`${errors.lastName ? 'border-rose-300' : ''} ${styles}`}
+                                   {...register("lastName", {required: "This field is required"})}
+                            />
+                        </FormRow>
+                    </FlexItem>
+                </FlexContainer>
+
+                <FlexContainer>
+                    <FlexItem>
                         <FormRow label="Email Address" id="email" error={errors.email?.message}
                                  icon={<Icons id="envelope" width="20" height="20" viewBox="0 0 20 20"/>}>
                             <input type="email" name="email" id="email" placeholder="e.g., 9SsZC@example.com"
@@ -94,7 +97,8 @@ function UserForm() {
                                    })}
                             />
                         </FormRow>
-
+                    </FlexItem>
+                    <FlexItem>
                         <FormRow label="Phone number" id="phoneNumber" error={errors.phoneNumber?.message}>
                             <PhoneInputWithCountry control={control} id="phoneNumber"
                                                    value={phoneInput} onChange={setPhoneInput}
@@ -106,17 +110,16 @@ function UserForm() {
                                                    }}
                             />
                         </FormRow>
+                    </FlexItem>
+                </FlexContainer>
 
-                        <FormRow label="Date of Birth" id="dob" error={errors.dob?.message}>
-                            <DatePicker disabled={isPending} id="dob" name="dob" register={register} control={control}
-                                        error/>
-                        </FormRow>
-
+                <FlexContainer>
+                    <FlexItem>
                         <FormRow label="Gender" id="gender" error={errors.gender?.message}>
                             <SelectWithIcon icon2={<Icons id="chevron-down"/>}>
                                 <select id="gender" name="gender" disabled={isPending}
                                         aria-placeholder="Select Gender"
-                                        className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles}`}
+                                        className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles} px-4`}
                                         {...register("gender", {required: "This field is required"})}>
 
                                     <option value="" className="text-body dark:text-bodydark">Select Gender</option>
@@ -127,57 +130,85 @@ function UserForm() {
                                 </select>
                             </SelectWithIcon>
                         </FormRow>
-                        <FlexContainer>
-                            <FlexItem>
-                                <FormRow label="Address" id="address" error={errors.address?.message}>
-                                    <input type="text" name="address" id="address" placeholder="e.g., 123 Main Street"
-                                           disabled={isPending}
-                                           className={`${errors.address ? 'border-rose-300' : ''} ${styles}`}
-                                           {...register("address", {required: "This field is required"})}
-                                    />
-                                </FormRow>
-                            </FlexItem>
-                            <FlexItem>
-                                <FormRow label="Postcode" id="postcode" error={errors.postcode?.message}>
-                                    <input type="text" name="Postcode" id="postcode" placeholder="e.g., N1 1AA"
-                                           disabled={isPending}
-                                           className={`${errors.postcode ? 'border-rose-300' : ''} ${styles}`}
-                                           {...register("postcode", {required: "This field is required"})}
-                                    />
-                                </FormRow>
-                            </FlexItem>
-                        </FlexContainer>
+                    </FlexItem>
+                    <FlexItem>
+                        <FormRow label="Date of Birth" id="dob" error={errors.dob?.message}>
+                            <DatePicker disabled={isPending} id="dob" name="dob" register={register} control={control}
+                                        error/>
+                        </FormRow>
+                    </FlexItem>
+                </FlexContainer>
 
-                        <FlexContainer>
-                            <FlexItem>
-                                <FormRow label="City" id="city" error={errors.city?.message}>
-                                    <input type="text" name="city" id="city" placeholder="City"
-                                           disabled={isPending}
-                                           className={`${errors.city ? 'border-rose-300' : ''} ${styles}`}
-                                           {...register("city", {required: "This field is required"})}/>
-                                </FormRow>
-                            </FlexItem>
-                            <FlexItem>
-                                <FormRow label="Country" id="country" error={errors.country?.message}>
-                                    <SelectWithIcon
-                                        icon1={<Icons id="globe" width="20" height="20" viewBox="0 0 20 20"/>}
-                                        icon2={<Icons id="chevron-down"/>}>
+                <FlexContainer>
+                    <FlexItem>
+                        <FormRow label="Address" id="address" error={errors.address?.message}>
+                            <input type="text" name="address" id="address" placeholder="e.g., 123 Main Street"
+                                   disabled={isPending}
+                                   className={`${errors.address ? 'border-rose-300' : ''} ${styles} px-4`}
+                                   {...register("address", {required: "This field is required"})}
+                            />
+                        </FormRow>
+                    </FlexItem>
+                    <FlexItem>
+                        <FormRow label="Postcode" id="postcode" error={errors.postcode?.message}>
+                            <input type="text" name="Postcode" id="postcode" placeholder="e.g., N1 1AA"
+                                   disabled={isPending}
+                                   className={`${errors.postcode ? 'border-rose-300' : ''} ${styles} px-4`}
+                                   {...register("postcode", {required: "This field is required"})}
+                            />
+                        </FormRow>
+                    </FlexItem>
+                </FlexContainer>
 
-                                        <select id="country" name="country" disabled={isPending}
-                                                aria-placeholder="Select Country"
-                                                className={`${errors.country ? 'border-rose-300' : ''} ${selectStyles}`}
-                                                {...register("country", {required: "This field is required"})}>
+                <FlexContainer>
+                    <FlexItem>
+                        <FormRow label="City" id="city" error={errors.city?.message}>
+                            <input type="text" name="city" id="city" placeholder="City"
+                                   disabled={isPending}
+                                   className={`${errors.city ? 'border-rose-300' : ''} ${styles} px-4`}
+                                   {...register("city", {required: "This field is required"})}/>
+                        </FormRow>
+                    </FlexItem>
+                    <FlexItem>
+                        <FormRow label="Country" id="country" error={errors.country?.message}>
+                            <SelectWithIcon
+                                icon1={<Icons id="globe" width="20" height="20" viewBox="0 0 20 20"/>}
+                                icon2={<Icons id="chevron-down"/>}>
 
-                                            <option value="" className="text-body dark:text-bodydark">Select Country</option>
-                                            {countries?.map((option) => (
-                                                <option key={option.id} value={option}
-                                                        className="text-body dark:text-bodydark">{option}</option>
-                                            ))}
-                                        </select>
-                                    </SelectWithIcon>
-                                </FormRow>
-                            </FlexItem>
-                        </FlexContainer>
+                                <select id="country" name="country" disabled={isPending}
+                                        aria-placeholder="Select Country"
+                                        className={`${errors.country ? 'border-rose-300' : ''} ${selectStyles}`}
+                                        {...register("country", {required: "This field is required"})}>
+
+                                    <option value="" className="text-body dark:text-bodydark">Select Country</option>
+                                    {countries?.map((option) => (
+                                        <option key={option.id} value={option}
+                                                className="text-body dark:text-bodydark">{option}</option>
+                                    ))}
+                                </select>
+                            </SelectWithIcon>
+                        </FormRow>
+                    </FlexItem>
+                </FlexContainer>
+
+                <FlexContainer>
+                    <FlexItem>
+                        <FormRow label="Assign role" id="role" error={errors.role?.message}>
+                            <SelectWithIcon icon2={<Icons id="chevron-down"/>}>
+                                <select id="role" name="role" disabled={isPending}
+                                        aria-placeholder="Assign Role"
+                                        className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles} px-4`}
+                                        {...register("role")}>
+
+                                    {roles?.filter(role => role.roleName !== "Admin").map((role) => (
+                                        <option key={role.id} value={role.roleName}
+                                                className="text-body dark:text-bodydark">{role.roleName}</option>
+                                    ))}
+                                </select>
+                            </SelectWithIcon>
+                        </FormRow>
+                    </FlexItem>
+                    <FlexItem>
                         <FormRow label="Password" id="password" error={errors.password?.message}
                                  icon={<Icons id="lock" width="22" height="22" viewBox="0 0 22 22"/>}>
                             <input type="password" name="password" id="password" placeholder="**********"
@@ -192,34 +223,21 @@ function UserForm() {
                                    })}
                             />
                         </FormRow>
+                    </FlexItem>
+                </FlexContainer>
 
-                    </GeneralContainer>
-                </GridItem>
-{/* Profile Photo Upload Form*/}
-                <GridItem className="col-span-5 xl:col-span-2">
-                    <GeneralContainer>
-                        <Heading title="Profile Photo"/>
-                            <FormRow label="Profile Photo" id="photo">
-                                <PhotoFileInput  >
-                                    <input id="photo" name="photo" type="file" accept="image/*"
+                <ButtonGroup>
+                    <Button type="reset" variation="secondary" size="small" disabled={isPending}
+                            onClick={() => navigate("/users", {replace: true})}>
+                        Cancel
+                    </Button>
+                    <Button type="submit" variation="primary" size="small">
+                        {isPending ? <SpinnerMin label="loading..."/> : 'Save'}
+                    </Button>
+                </ButtonGroup>
 
-                                           className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
-                                           {...register("photo")}/>
-                                </PhotoFileInput>
-                            </FormRow>
-                        <ButtonGroup>
-                            <Button type="reset" variation="secondary" size="small" disabled={isPending}
-                                    onClick={() => navigate("/users", {replace: true})}>
-                                Cancel
-                            </Button>
-                            <Button type="submit" variation="primary" size="small">
-                                {isPending ? <SpinnerMin label="loading..."/> : 'Save'}
-                            </Button>
-                        </ButtonGroup>
+            </GeneralContainer>
 
-                    </GeneralContainer>
-                </GridItem>
-            </GridContainer>
         </form>
 
     );
