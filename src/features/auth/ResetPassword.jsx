@@ -15,7 +15,7 @@ import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
  * Handles the submission of the reset password form for logged-in users.
  * uses useResetPassword hook to send a request to the backend for password reset.
  *
- * @return {component} with a form for users to enter new password.
+ * @return {JSX.Element} with a form for users to enter new password.
  *
  * @author James M Kambanga,
  * Date: April 1, 2024,
@@ -44,12 +44,12 @@ function ResetPassword() {
             <GeneralContainer>
 
                 <div className="w-full border-stroke dark:border-strokedark">
-                    <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-                        <Heading title="Create New Password"/>
+                    <div className="w-full p-4">
+                        <Heading title="Reset Your Password"/>
 
                         <form onSubmit={handleSubmit}>
 
-                            <FormRow label="Email Address" id="email" required
+                            <FormRow label="Please Enter Your Email Address" id="email" required
                                      icon={<Icons id="envelope" width="20" height="20" viewBox="0 0 20 20"/>}>
                                 <input type="email" name="email" id="email" placeholder="e.g., 9SsZC@example.com"
                                        className={styles} disabled={isPending}
@@ -57,17 +57,18 @@ function ResetPassword() {
                             </FormRow>
 
 
-                            <div className="mb-5 flex justify-between text-gray hover:bg-opacity-90">
-                                <Link to="/login" className="flex items-center gap-2">
+                            <div className="mb-5 flex flex-col gap-4 xsm:flex-row-reverse justify-between text-gray hover:bg-opacity-90">
+                                <Button className="" type="submit" variation="primary" size="small" disabled={isPending}>
+                                    {!isPending ? 'Send Password reset link' : <SpinnerMin label="Loading.."/> }
+                                </Button>
+                                <Link to="/login" className="flex items-center gap-2 xsm:order-1">
                                     <span className="flex items-center justify-center  w-8 h-8  rounded-full bg-primary text-white">
                                         <Icons id="left-arrow"/>
                                     </span>
                                     <span className="text-primary hover:underline">Back to Login</span>
                                 </Link>
 
-                                <Button type="submit" variation="primary" size="small" disabled={isPending}>
-                                    {!isPending ? 'Send Password reset link' : <SpinnerMin label="Loading.."/> }
-                                </Button>
+
                             </div>
 
                         </form>

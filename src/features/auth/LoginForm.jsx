@@ -36,7 +36,7 @@ function LoginForm() {
     return (
         <GeneralContainer>
             <div className="w-full border-stroke dark:border-strokedark">
-                <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
+                <div className="w-full sm:p-12.5 xl:p-17.5">
                     <span className="mb-1.5 block font-medium">Welcome back!</span>
 
                     <div className="flex flex-col justify-center items-center">

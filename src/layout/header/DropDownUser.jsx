@@ -21,8 +21,6 @@ function DropDownUser (){
     const {user} = useUser();
     const {firstName, role, avatar} = user?.user_metadata || {};
 
-    console.log(avatar);
-
     const trigger = useRef(null)
     const dropdown = useRef(null)
 

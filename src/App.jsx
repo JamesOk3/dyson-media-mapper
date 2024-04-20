@@ -33,6 +33,7 @@ import UserList from "./features/users/UserList.jsx";
 import ResetPassword from "./features/auth/ResetPassword.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
+import EventDetails from "./features/events/EventDetails.jsx";
 
 
 /**
@@ -81,6 +82,7 @@ function App() {
                             <Route index element={<Navigate to="calendar" />} />
                             <Route path="calendar" element={<Calendar />} />
                             <Route path="add-event" element={<AddEvent />} />
+                            <Route path="event-details/:eventId" element={<EventDetails />} />
                         </Route>
                         <Route path="/bookings" element={<Bookings />} >
                             <Route index element={<Navigate to="product-requests" />} />

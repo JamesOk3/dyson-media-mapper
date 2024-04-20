@@ -14,6 +14,7 @@ Error Boundaries (error when rendering components):  react-error-boundary
 Date Picker: npm i flatpickr --save
 npm install react-hot-toast
 npm i react-hook-form
+npm install date-fns --save
 
 supabase client: npm install @supabase/supabase-js
 

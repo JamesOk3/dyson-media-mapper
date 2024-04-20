@@ -2,7 +2,6 @@ import {useNavigate} from "react-router-dom";
 
 import Heading from "../../ui/Heading.jsx";
 
-// import {users} from "../../assets/data/uers.js";
 import GeneralContainer from "../../ui/containers/GeneralContainer.jsx";
 import {ButtonGroup, AddButton} from "../../ui/buttons/Button.jsx";
 import MinSearchBar from "../../ui/forms/MinSearchBar.jsx";
