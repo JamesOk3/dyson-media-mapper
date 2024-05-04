@@ -1,5 +1,21 @@
 import {Link} from "react-router-dom";
 
+/**
+ * Renders an event card component with details like city, date, content, title, tag, id, and time.
+ *
+ * @param {string} city - The city associated with the event.
+ * @param {string} date - The date of the event.
+ * @param {string} content - The content or description of the event.
+ * @param {string} title - The title of the event.
+ * @param {string} tag - The tag associated with the event.
+ * @param {string} id - The unique identifier of the event.
+ * @param {Object} time - The object containing start and end time of the event.
+ * @return {JSX.Element} The rendered event card component.
+ *
+ * @author James M Kambanga
+ * Date: April 19, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function EventCard({city, date, content, title, tag, id, time}) {
     return (
         <div className="col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
@@ -11,12 +27,12 @@ function EventCard({city, date, content, title, tag, id, time}) {
                         </div>
                     </div>
                     <div>
-                        <Link to={`/events/event-details/${id}`} className="inline-flex text-slate-800 dark:text-slate-100 hover:text-slate-900 dark:hover:text-white mb-1">
+                        <Link to={`/events/event-details/${id}`} className="inline-flex text-slate-800 dark:text-slate-100 hover:text-indigo-500 dark:hover:text-white mb-1">
                             <h3 className="h4 mb-2 text-xl leading-snug font-semibold">{title}</h3>
                         </Link>
                     </div>
                 </header>
-                <p className="text-lg text-gray-400 grow">
+                <p className="text-lg text-gray-400 grow line-clamp-2">
                     {content}
                 </p>
                 <footer className=" mt-5">

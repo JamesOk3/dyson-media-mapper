@@ -1,4 +1,4 @@
-import supabase, {supabaseUrl} from "./supabase.js";
+import supabase, {supabase2, supabaseUrl} from "./supabase.js";
 
 /**
  * Function to create a new user with the provided information and update the database.
@@ -26,8 +26,7 @@ import supabase, {supabaseUrl} from "./supabase.js";
 
 export async function createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role})
 {
-
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabase2.auth.signUp({
         email,
         password,
         options: {
@@ -51,6 +50,7 @@ export async function createUser({firstName, lastName, email, password, phoneNum
         console.log(error);
         throw new Error(error.message);
     }
+
     return data;
 }
 
@@ -89,13 +89,14 @@ export async function login({email, password}) {
  * Copyright (C) 2024 Newcastle University, UK
  */
 export async function getCurrentUser() {
+
     const {data: session } = await supabase.auth.getSession();
     if (!session.session) return null;
 
     const {data, error} = await supabase.auth.getUser();
-
     if (error) throw new Error(error.message);
-    return data?.user;
+
+    return data.user;
 }
 
 /**
@@ -131,6 +132,7 @@ export async function getAllUsers() {
     const { data, error } = await supabase
         .from('profiles')
         .select('*')
+        .order('id', { ascending: false });
     if(error) throw new Error("Could not fetch users");
     return data;
 }

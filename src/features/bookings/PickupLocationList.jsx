@@ -45,7 +45,7 @@ function PickupLocationList() {
                     </Modal.Window>
                 </Modal>
             </ButtonGroup>
-            <Heading title="Users List" />
+            <Heading title="Pickup Locations" />
             <Table >
                 <Table.Header>
                     <Table.Thead theadStyles="">Address</Table.Thead>

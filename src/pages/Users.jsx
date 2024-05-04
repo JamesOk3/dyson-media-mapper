@@ -1,8 +1,6 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
 import Row from "../ui/containers/Row.jsx";
-import UserList from "../features/users/UserList.jsx";
 import {Outlet} from "react-router-dom";
-
 /**
  * A function that renders the Users component.
  *
@@ -19,7 +17,6 @@ function Users() {
             <Breadcrumb pageName="Users"/>
             <Outlet />
         </Row>
-
     );
 }
 

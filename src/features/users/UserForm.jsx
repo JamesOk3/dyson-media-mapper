@@ -33,24 +33,36 @@ const countries = ['UK', 'USA', 'China', 'Australia', 'Tanzania'];
  * Date: April 1, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-function UserForm() {
+function UserForm({ user = {}, setUserToEdit }) {
+    const { email, userValues } = user;
+    const isEditSession = Boolean(email);
+
     const {createUser, isPending} = useCreateUser();
     const [phoneInput, setPhoneInput] = useState("");
     const navigate = useNavigate();
 
-    const {register, handleSubmit, formState, control, reset} = useForm();
+    const {register, handleSubmit, formState, control, reset} = useForm({
+        defaultValues: isEditSession ? {
+            ...user
+        } : {},
+    });
     const {errors} = formState;
 
     const { roles } = useRoles();
 
     function onSubmit({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role}) {
-        createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role},
-            {
-                onSuccess: () => {
-                    reset();
-                    navigate("/users", {replace: true});
-                },
-            });
+        if (!isEditSession) {
+            createUser({firstName, lastName, email, password, phoneNumber, dob, gender, address, city, postcode, country, role},
+                {
+                    onSuccess: () => {
+                        reset();
+                        navigate("/users", {replace: true});
+                    },
+                });
+        } else {
+            console.log(user);
+        }
+
     }
 
     return (
@@ -63,7 +75,7 @@ function UserForm() {
                         <FormRow label="First Name" id="firstName" error={errors.firstName?.message}
                                  icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
                             <input type="text" name="firstName" id="firstName" placeholder="e.g., James"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.firstName ? 'border-rose-300' : ''} ${styles}`}
                                    {...register("firstName", {required: "This field is required"})}
                             />
@@ -73,7 +85,7 @@ function UserForm() {
                         <FormRow label="Last Name" id="lastName" error={errors.lastName?.message}
                                  icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
                             <input type="text" name="lastName" id="lastName" placeholder="e.g., Smith"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.lastName ? 'border-rose-300' : ''} ${styles}`}
                                    {...register("lastName", {required: "This field is required"})}
                             />
@@ -86,7 +98,7 @@ function UserForm() {
                         <FormRow label="Email Address" id="email" error={errors.email?.message}
                                  icon={<Icons id="envelope" width="20" height="20" viewBox="0 0 20 20"/>}>
                             <input type="email" name="email" id="email" placeholder="e.g., 9SsZC@example.com"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.email ? 'border-rose-300' : ''} ${styles}`}
                                    {...register("email", {
                                        required: "This field is required",
@@ -102,7 +114,7 @@ function UserForm() {
                         <FormRow label="Phone number" id="phoneNumber" error={errors.phoneNumber?.message}>
                             <PhoneInputWithCountry control={control} id="phoneNumber"
                                                    value={phoneInput} onChange={setPhoneInput}
-                                                   name="phoneNumber" disabled={isPending}
+                                                   name="phoneNumber" disabled={isPending || isEditSession}
                                                    className={`${errors.phoneNumber ? 'border-rose-300' : ''} !px-4 ${styles}`}
                                                    rules={{
                                                        required: "This field is required",
@@ -117,7 +129,7 @@ function UserForm() {
                     <FlexItem>
                         <FormRow label="Gender" id="gender" error={errors.gender?.message}>
                             <SelectWithIcon icon2={<Icons id="chevron-down"/>}>
-                                <select id="gender" name="gender" disabled={isPending}
+                                <select id="gender" name="gender" disabled={isPending || isEditSession}
                                         aria-placeholder="Select Gender"
                                         className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles} px-4`}
                                         {...register("gender", {required: "This field is required"})}>
@@ -133,7 +145,7 @@ function UserForm() {
                     </FlexItem>
                     <FlexItem>
                         <FormRow label="Date of Birth" id="dob" error={errors.dob?.message}>
-                            <DatePicker disabled={isPending} id="dob" name="dob" register={register} control={control}
+                            <DatePicker disabled={isPending || isEditSession} id="dob" name="dob" register={register} control={control}
                                         error/>
                         </FormRow>
                     </FlexItem>
@@ -143,7 +155,7 @@ function UserForm() {
                     <FlexItem>
                         <FormRow label="Address" id="address" error={errors.address?.message}>
                             <input type="text" name="address" id="address" placeholder="e.g., 123 Main Street"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.address ? 'border-rose-300' : ''} ${styles} px-4`}
                                    {...register("address", {required: "This field is required"})}
                             />
@@ -152,7 +164,7 @@ function UserForm() {
                     <FlexItem>
                         <FormRow label="Postcode" id="postcode" error={errors.postcode?.message}>
                             <input type="text" name="Postcode" id="postcode" placeholder="e.g., N1 1AA"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.postcode ? 'border-rose-300' : ''} ${styles} px-4`}
                                    {...register("postcode", {required: "This field is required"})}
                             />
@@ -164,7 +176,7 @@ function UserForm() {
                     <FlexItem>
                         <FormRow label="City" id="city" error={errors.city?.message}>
                             <input type="text" name="city" id="city" placeholder="City"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.city ? 'border-rose-300' : ''} ${styles} px-4`}
                                    {...register("city", {required: "This field is required"})}/>
                         </FormRow>
@@ -175,7 +187,7 @@ function UserForm() {
                                 icon1={<Icons id="globe" width="20" height="20" viewBox="0 0 20 20"/>}
                                 icon2={<Icons id="chevron-down"/>}>
 
-                                <select id="country" name="country" disabled={isPending}
+                                <select id="country" name="country" disabled={isPending || isEditSession}
                                         aria-placeholder="Select Country"
                                         className={`${errors.country ? 'border-rose-300' : ''} ${selectStyles}`}
                                         {...register("country", {required: "This field is required"})}>
@@ -195,12 +207,12 @@ function UserForm() {
                     <FlexItem>
                         <FormRow label="Assign role" id="role" error={errors.role?.message}>
                             <SelectWithIcon icon2={<Icons id="chevron-down"/>}>
-                                <select id="role" name="role" disabled={isPending}
+                                <select id="role" name="role" disabled={isPending }
                                         aria-placeholder="Assign Role"
                                         className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles} px-4`}
                                         {...register("role")}>
 
-                                    {roles?.filter(role => role.roleName !== "Admin").map((role) => (
+                                    {roles?.filter(role => role.roleName === "user" || role.roleName === "member").map((role) => (
                                         <option key={role.id} value={role.roleName}
                                                 className="text-body dark:text-bodydark">{role.roleName}</option>
                                     ))}
@@ -212,7 +224,7 @@ function UserForm() {
                         <FormRow label="Password" id="password" error={errors.password?.message}
                                  icon={<Icons id="lock" width="22" height="22" viewBox="0 0 22 22"/>}>
                             <input type="password" name="password" id="password" placeholder="**********"
-                                   disabled={isPending}
+                                   disabled={isPending || isEditSession}
                                    className={`${errors.password ? 'border-rose-300' : ''} ${styles}`}
                                    {...register("password", {
                                        required: "This field is required",
@@ -231,7 +243,7 @@ function UserForm() {
                             onClick={() => navigate("/users", {replace: true})}>
                         Cancel
                     </Button>
-                    <Button type="submit" variation="primary" size="small">
+                    <Button type="submit" variation="primary" size="small" disabled={isPending || isEditSession}>
                         {isPending ? <SpinnerMin label="loading..."/> : 'Save'}
                     </Button>
                 </ButtonGroup>

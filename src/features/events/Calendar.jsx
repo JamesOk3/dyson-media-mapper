@@ -6,6 +6,15 @@ import Spinner from "../../ui/spinners/Spinner.jsx";
 import Empty from "../../ui/Empty.jsx";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * Renders a calendar component that displays a list of events.
+ *
+ * @return {JSX.Element} The rendered calendar component.
+ *
+ * @author James M Kambanga
+ * Date: April 19, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function Calendar() {
     const navigate = useNavigate();
     const {isFetching, events} = useGetAllEvents();

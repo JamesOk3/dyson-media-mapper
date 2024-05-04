@@ -13,7 +13,7 @@ import Icons from "../Icons.jsx";
  * Date: March 31, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-export function Button({variation = "primary", type = "submit", size = "large", children, onClick}) {
+export function Button({variation = "primary", type = "submit", size = "large", children, onClick, disabled}) {
 
     const btnSizeStyles = size === "large" ? "w-full py-3" : "px-6 py-3";
 
@@ -22,7 +22,7 @@ export function Button({variation = "primary", type = "submit", size = "large", 
 
     if (variation === "primary") {
         return (
-            <button onClick={onClick} type={type}
+            <button disabled={disabled} onClick={onClick} type={type}
                     className={`bg-primary text-gray hover:bg-opacity-90 ${baseStyles}`}>
                 {children}
             </button>
@@ -31,7 +31,7 @@ export function Button({variation = "primary", type = "submit", size = "large", 
 
     if (variation === "secondary") {
         return (
-            <button onClick={onClick} type={type}
+            <button disabled={disabled} onClick={onClick} type={type}
                 className={`border border-stroke text-black hover:shadow-1 hover:border-primary dark:border-strokedark dark:hover:border-primary dark:text-white ${baseStyles}`}>
                 {children}
             </button>
@@ -56,6 +56,15 @@ export function ButtonGroup({children}) {
         <div className="flex justify-end gap-4.5">
             {children}
         </div>
+    );
+}
+
+export function EditButton({onClick}) {
+    return (
+        <button className="flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:text-primary hover:bg-gray dark:hover:bg-meta-4"
+            onClick={onClick}
+        ><Icons id="edit"/>
+        </button>
     );
 }
 

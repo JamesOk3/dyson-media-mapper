@@ -14,3 +14,10 @@ export async function getRoles() {
     if(error) throw new Error("Could not fetch roles");
     return data;
 }
+
+export async function createUserRole(userId, roleId) {
+    const { error } = supabase.from("user_roles").insert([{userId, roleId}]);
+    console.log(error);
+    console.log(userId, roleId);
+    if(error) throw new Error("Could not create user role");
+}

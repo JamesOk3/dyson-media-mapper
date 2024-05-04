@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {format} from 'date-fns';
 import Icons from "../../ui/Icons.jsx";
 import {useGetEvent} from "./hooks/useGetEvent.js";
@@ -6,31 +6,34 @@ import Spinner from "../../ui/spinners/Spinner.jsx";
 import Empty from "../../ui/Empty.jsx"
 import defaultUser from "../../images/user/default-user.jpeg";
 import ListItem2 from "../../ui/lists/ListItem2.jsx";
+import BackButton from "../../ui/buttons/BackButton.jsx";
+import {useGetTeamById} from "../teams/hooks/useGetTeamById.js";
+import {useGetTeamEvents} from "./hooks/useGetTeamEvents.js";
+import EventItem from "./EventItem.jsx";
+import {EditButton} from "../../ui/buttons/Button.jsx";
 
-const members = [
-    {
-        name: 'Ningxin Wang',
-        avatar: defaultUser,
-    },
-    {
-        name: 'James M Kambanga',
-        avatar: defaultUser,
-    },
-    {
-        name: 'Jiayi Li',
-        avatar: defaultUser,
-    },
-    {
-        name: 'Grace Morrow',
-        avatar: defaultUser,
-    }
-]
-
+/**
+ * Renders the details of an event.
+ *
+ * @return {JSX.Element} The JSX element containing the event details.
+ *
+ * @author James M Kambanga
+ * Date: April 20, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function EventDetails() {
-
+    const navigate = useNavigate();
     const {isFetchingEvent, event} = useGetEvent();
 
-    if (isFetchingEvent) return <Spinner />
+    const {isFetchingTeam, team} = useGetTeamById(event?.assignedTeam);
+    const {leaderData, members, id: teamId, name} = team?.[0] || {};
+    const {isFetching: isFetchingTeamEvents, teamEvents} = useGetTeamEvents(teamId);
+
+    const leaderExists = Boolean(leaderData);
+
+    const isFetching = isFetchingEvent || isFetchingTeam || isFetchingTeamEvents;
+
+    if (isFetching) return <Spinner />
 
     if (!event) return <Empty resourceName="Event" />
 
@@ -43,43 +46,44 @@ function EventDetails() {
                         <div className="max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-8 xl:space-x-16">
                             <div>
                                 <div className="mb-6">
-                                    <Link className="btn-sm px-3 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-300"
-                                        to="/events">
-                                        <Icons id="chevron-left" className="fill-current text-slate-400 dark:text-slate-500 mr-2" width="7" height="12" viewBox="0 0 7 12" />
-                                        <span>Back To Events</span>
-                                    </Link>
+                                    <BackButton/>
                                 </div>
-                                <div className="text-sm font-semibold text-indigo-500 uppercase mb-2"> {format(event.eventDate, 'eeee, MMM dd, yyyy')} &mdash;
+                                <h4 className="flex mb-2 text-left text-title-xsm font-bold text-black dark:text-white sm:text-title-md">
+                                    {event.eventName}
+                                    <span>
+                                        <EditButton onClick={() => navigate("edit", {replace: true})} />
+                                    </span>
+                                </h4>
+
+                                <div
+                                    className="text-sm font-semibold text-indigo-500 uppercase mb-2"> {format(event.eventDate, 'eeee, MMM dd, yyyy')} &mdash;
                                     {event.startTime} &rarr; {event.endTime}
                                 </div>
-                                <header className="mb-4">
-                                    {/* Title */}
-                                    <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-2">{event.title}</h1>
-                                    <p>{event.description}</p>
-                                </header>
 
                                 <div className="space-y-3 sm:flex sm:items-center sm:justify-between sm:space-y-0 mb-6">
-                                    {/* Author */}
                                     <div className="flex items-center sm:mr-4">
                                         <a className="block mr-2 shrink-0" href="#0">
-                                            <img className="rounded-full" src={defaultUser} width="32" height="32"
+                                            <img className="rounded-full" src={leaderData?.avatar || defaultUser}
+                                                 width="32" height="32"
                                                  alt="User 04"/>
                                         </a>
-                                        <div className="text-sm whitespace-nowrap">
-                                            Hosted by{' '}
-                                            <a className="font-semibold text-slate-800 dark:text-slate-100" href="#0">
-                                                Hiruy Alemseged
-                                            </a>
-                                        </div>
+                                        {!leaderExists ? <p>No leader assigned</p> : (
+                                            <div className="text-sm whitespace-nowrap">
+                                                Supervised by{' '}
+                                                <Link className="font-semibold text-slate-800 dark:text-slate-100"
+                                                      to="#0">
+                                                    {`${leaderData?.firstname} ${leaderData?.lastname}`}
+                                                </Link>
+                                            </div>
+                                        )}
                                     </div>
                                     {/* Right side */}
                                     <div className="flex flex-wrap items-center sm:justify-end space-x-2">
-                                        {/* Tags */}
-                                        <div className="text-xs inline-flex items-center font-medium bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full text-center px-2.5 py-1">
-                                            <span>Live Event</span>
+                                        <div className="text-sm inline-flex items-center font-medium bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full text-center px-2.5 py-1">
+                                            <span>{name}</span>
                                         </div>
                                         <div className="text-xs inline-flex font-medium uppercase bg-emerald-100 dark:bg-emerald-400/30 text-emerald-600 dark:text-emerald-400 rounded-full text-center px-2.5 py-1">
-                                            Free
+                                            Upcoming
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +104,8 @@ function EventDetails() {
                                     </div>
 
 
-                                    <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">Event Details</h2>
+                                    <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">Event
+                                        Details</h2>
 
                                     <p className="mb-6">
                                         {event.description}
@@ -111,50 +116,13 @@ function EventDetails() {
 
 
                                 <div>
-                                    <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">Similar
+                                    <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">More
                                         Events</h2>
-                                    <div className="space-y-8 sm:space-y-5 my-6 lg:mb-0">
-
-                                        <article className="flex bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-
-                                            <div className="grow p-5 flex flex-col">
-                                                <div className='grow'>
-                                                    <div className="text-sm font-semibold text-indigo-500 uppercase mb-2">Mon
-                                                        27 Dec, 2024
-                                                    </div>
-                                                    <a className="inline-flex mb-2" href="#0">
-                                                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
-                                                            London &amp;  Dyson Special Event</h3>
-                                                    </a>
-                                                    <div className="text-sm">
-                                                        Lorem ipsum is placeholder text commonly used in the graphic,
-                                                        print, and publishing industries for previewing layouts.
-                                                    </div>
-                                                </div>
-                                                {/* Footer */}
-                                                <div className="flex justify-between mt-3">
-                                                    {/* Tag */}
-                                                    <div className="text-xs inline-flex items-center font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full text-center px-2.5 py-1">
-                                                        <span>Live Event</span>
-                                                    </div>
-                                                    {/* Avatars */}
-                                                    <div className="flex items-center space-x-2">
-                                                        <div className="flex -space-x-3 -ml-0.5">
-                                                            <img
-                                                                className="rounded-full border-2 border-white dark:border-slate-800 box-content"
-                                                                src={defaultUser} width="28" height="28" alt="User 02"/>
-                                                            <img
-                                                                className="rounded-full border-2 border-white dark:border-slate-800 box-content"
-                                                                src={defaultUser} width="28" height="28" alt="User 03"/>
-                                                            <img
-                                                                className="rounded-full border-2 border-white dark:border-slate-800 box-content"
-                                                                src={defaultUser} width="28" height="28" alt="User 04"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
+                                    {!teamEvents?.length ? <p>No events assigned</p> : (
+                                        teamEvents?.map((event) => (
+                                            <EventItem key={event.id} event={event} isFetching={isFetching}/>
+                                        ))
+                                    )}
                                 </div>
                             </div>
 
@@ -181,9 +149,9 @@ function EventDetails() {
                                         </Link>
                                     </div>
                                     <ul className="space-y-3">
-                                        {members.map((member, index) => (
-                                                <ListItem2 key={index} image={member.avatar} content={member.name}/>
-                                            ))
+                                        {members?.map((member, index) => (
+                                            <ListItem2 key={index} image={member?.avatar || defaultUser} content={`${member?.firstname} ${member?.lastname}`}/>
+                                        ))
                                         }
                                     </ul>
                                 </div>

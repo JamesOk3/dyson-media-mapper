@@ -1,13 +1,11 @@
 import Breadcrumb from "../ui/Breadcrumb.jsx";
-
+import TeamDetails from "../features/teams/TeamDetails.jsx";
 
 function Teams() {
     return (
         <>
             <Breadcrumb pageName="Teams"/>
-            <div>
-                <h1>Teams Page</h1>
-            </div>
+            <TeamDetails/>
         </>
 
     );

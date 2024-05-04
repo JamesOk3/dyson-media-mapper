@@ -14,13 +14,29 @@ import {useAddEvent} from "./hooks/useAddEvent.js";
 import {useEditEvent} from "./hooks/useEditEvent.js";
 import SpinnerMin from "../../ui/spinners/SpinnerMin.jsx";
 import Row from "../../ui/containers/Row.jsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {useGetAllTeams} from "../teams/hooks/useGetAllTeams.js";
+import {useGetEvent} from "./hooks/useGetEvent.js";
 
-const teams = ['Team 1', 'Team 2', 'Team 3', 'Team 4'];
-
-function EventForm({ event = {} }) {
+// const teams1 = ['Team 1', 'Team 2', 'Team 3', 'Team 4'];
+/**
+ * Renders a form for creating or editing an event.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.event - The event object to be edited, if any.
+ * @return {JSX.Element} The rendered form component.
+ *
+ * @author James M Kambanga
+ * Date: April 17, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+function EventForm() {
     const navigate = useNavigate();
-    const {id: eventId, ...eventValues} = event;
+    const {isFetchingEvent, event} = useGetEvent();
+    const {eventId: evId} = useParams();
+    console.log(evId, event);
+
+    const {id: eventId, ...eventValues} = event || {};
     const isEditSession = Boolean(eventId);
 
     const {register, handleSubmit, control, formState, reset} = useForm({
@@ -30,17 +46,18 @@ function EventForm({ event = {} }) {
 
     const {isAdding, addEvent} = useAddEvent();
     const {isEditing, editEvent} = useEditEvent();
+    const {isFetching, teams} = useGetAllTeams();
     const isWorking = isAdding || isEditing;
 
     function onSubmit(data) {
         if (isEditSession) {
             editEvent({
-                newEventData: data,
+                eventData: data,
                 id: eventId
             },{
                 onSuccess: () => {
                     reset();
-                    navigate("/events", {replace: true});
+                    navigate(`/events/event-details/${eventId}`, {replace: true});
                 }
             });
         } else {
@@ -122,9 +139,9 @@ function EventForm({ event = {} }) {
                                             {...register("assignedTeam")}>
 
                                         <option value="" className="text-body dark:text-bodydark">Select Team</option>
-                                        {teams?.map((option, index) => (
-                                            <option key={option.id} value={index}
-                                                    className="text-body dark:text-bodydark">{option}
+                                        {teams?.map((team) => (
+                                            <option key={team.id} value={team.id}
+                                                    className="text-body dark:text-bodydark">{team.name}
                                             </option>
                                         ))}
                                     </select>

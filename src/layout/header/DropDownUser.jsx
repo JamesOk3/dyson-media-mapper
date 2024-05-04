@@ -18,8 +18,9 @@ import defaultUser from "../../images/user/default-user.jpeg";
 function DropDownUser (){
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const {logout, isPending} = useLogout();
-    const {user} = useUser();
-    const {firstName, role, avatar} = user?.user_metadata || {};
+    const {user, appRole} = useUser();
+    // const { appRole, user_metadata: {firstName, avatar} } = user || {};
+    const {firstName, avatar} = user?.user_metadata || {};
 
     const trigger = useRef(null)
     const dropdown = useRef(null)
@@ -56,7 +57,7 @@ function DropDownUser (){
                 to="#">
                 <span className="hidden text-right lg:block">
                   <span className="block text-sm font-medium text-black dark:text-white">{firstName}</span>
-                  <span className="block text-xs">{role}</span>
+                  <span className="block text-xs">{appRole}</span>
                 </span>
 
                 <span className="h-12 w-12 rounded-full">

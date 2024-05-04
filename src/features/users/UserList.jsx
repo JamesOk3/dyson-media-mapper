@@ -10,6 +10,7 @@ import UserRow from "./UserRow.jsx";
 import {useGetAllUsers} from "../auth/hooks/useGetAllUsers.js";
 import Spinner from "../../ui/spinners/Spinner.jsx";
 import Empty from "../../ui/Empty.jsx";
+import {useState} from "react";
 
 /**
  * Renders a table component displaying a list of users.
@@ -21,6 +22,7 @@ import Empty from "../../ui/Empty.jsx";
  * Copyright (C) 2024 Newcastle University, UK
  */
 function UserList() {
+    const [ userToEdit, setUserToEdit ]  = useState("");
     const navigate = useNavigate()
     const {isFetching, users } = useGetAllUsers();
 
@@ -48,7 +50,11 @@ function UserList() {
 
                 <Table.Body
                     data={users}
-                    render={(user) => <UserRow user={user} key={user.id}/>}
+                    render={(user) => <UserRow key={user.id}
+                        user={user}
+                        setUserToEdit={setUserToEdit}
+                        userToEdit={userToEdit}
+                        />}
                 />
             </Table>
 

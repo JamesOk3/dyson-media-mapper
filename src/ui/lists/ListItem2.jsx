@@ -1,11 +1,25 @@
+import defaultUser from "../../images/user/default-user.jpeg";
 
+
+/**
+ * Renders a list item component with an image and content.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.image - The URL of the image.
+ * @param {string} props.content - The content to be displayed.
+ * @return {JSX.Element} The rendered list item component.
+ *
+ * @author James M Kambanga
+ * Date: April 19, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function ListItem2({image, content}) {
     return (
         <li>
             <div className="flex justify-between">
                 <div className="grow flex items-center">
                     <div className="relative mr-3">
-                        <img className="w-8 h-8 rounded-full" src={image}
+                        <img className="w-8 h-8 rounded-full" src={image || defaultUser}
                              width="32" height="32" alt="User profile"/>
                     </div>
                     <div className="truncate">
