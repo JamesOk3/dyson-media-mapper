@@ -38,6 +38,23 @@ export function Button({variation = "primary", type = "submit", size = "large", 
         );
     }
 
+    if (variation === "success") {
+        return (
+            <button disabled={disabled} onClick={onClick} type={type}
+                    className={`bg-success text-gray hover:bg-opacity-90 ${baseStyles}`}>
+                {children}
+            </button>
+        );
+    }
+    if (variation === "warning") {
+        return (
+            <button disabled={disabled} onClick={onClick} type={type}
+                    className={`bg-rose-400 text-gray hover:bg-opacity-90 ${baseStyles}`}>
+                {children}
+            </button>
+        );
+    }
+
 }
 
 export function AddButton({onClick, label}) {
@@ -68,3 +85,40 @@ export function EditButton({onClick}) {
     );
 }
 
+export function ViewButton({onClick, children}) {
+    return (
+        <button className="flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4"
+            onClick={onClick}>
+            <Icons id="view"/> {children}
+        </button>
+    );
+}
+
+export function ApproveButton({onClick, children, type}) {
+    return (
+        <button className={`flex items-center gap-0.5 rounded-md ${type === "small" ? "p-1 text-sm" : "px-4 py-3 font-medium"}  text-left bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:text-emerald-700 dark:bg-emerald-400/30  dark:text-emerald-400`}
+                onClick={onClick}>
+            <Icons id="check" className="w-4 h-4 fill-current shrink-0"  viewBox="0 0 16 16"/> {children}
+        </button>
+    );
+}
+export function RejectButton({onClick, children, type}) {
+    return (
+        <button className={`flex items-center rounded-md gap-0.5  text-rose-500 hover:bg-rose-200 ${type === "small" ? "p-1 text-sm" : "px-4 py-3 font-medium"}  text-left `}
+                onClick={onClick}>
+            <Icons id="close" className="w-4 h-4 fill-current shrink-0"   /> {children}
+        </button>
+    );
+}
+
+export function MoreButton({onClick, children}) {
+    return (
+        <button onClick={onClick}
+            className="group relative flex items-center gap-2.5 rounded-sm px-4 py-1 text-sm text-indigo-500 hover:text-primary duration-300 ease-in-out">
+            <p>{children}</p>
+            <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
+                   className="absolute -right-2 top-1/2 -translate-y-1/2 fill-current"
+            />
+        </button>
+    );
+}

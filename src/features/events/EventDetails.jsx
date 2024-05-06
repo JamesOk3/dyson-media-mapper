@@ -55,8 +55,7 @@ function EventDetails() {
                                     </span>
                                 </h4>
 
-                                <div
-                                    className="text-sm font-semibold text-indigo-500 uppercase mb-2"> {format(event.eventDate, 'eeee, MMM dd, yyyy')} &mdash;
+                                <div className="text-sm font-semibold text-indigo-500 uppercase mb-2"> {format(event.eventDate, 'eeee, MMM dd, yyyy')} &mdash;
                                     {event.startTime} &rarr; {event.endTime}
                                 </div>
 
@@ -94,8 +93,7 @@ function EventDetails() {
                                         <h5>{event.address}</h5>
                                         <p>{`${event.city} ${event.postcode}, ${event.country}`}</p>
 
-                                        <button
-                                            className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-primary duration-300 ease-in-out">
+                                        <button className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-primary duration-300 ease-in-out">
                                             <p>View on map</p>
                                             <Icons id="down-arrow" width="20" height="20" viewBox="0 0 20 20"
                                                    className="absolute -right-2 top-1/2 -translate-y-1/2 fill-current"

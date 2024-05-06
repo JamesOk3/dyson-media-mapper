@@ -29,7 +29,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
                     <button onClick={resetErrorBoundary}
                           className="mt-7.5 inline-flex items-center gap-2 rounded-md bg-primary py-3 px-6 font-medium text-white hover:bg-opacity-90">
                         <Icons id="left-arrow" width="16" height="16" viewBox="0 0 16 14" />
-                        <span>Back to Homepage</span>
+                        <span>Back</span>
                     </button>
                 </div>
             </div>

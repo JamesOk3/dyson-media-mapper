@@ -1,5 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useState} from "react";
+import {isFuture, subYears, isAfter} from "date-fns";
+
 
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
@@ -62,7 +64,6 @@ function UserForm({ user = {}, setUserToEdit }) {
         } else {
             console.log(user);
         }
-
     }
 
     return (
@@ -112,15 +113,15 @@ function UserForm({ user = {}, setUserToEdit }) {
                     </FlexItem>
                     <FlexItem>
                         <FormRow label="Phone number" id="phoneNumber" error={errors.phoneNumber?.message}>
-                            <PhoneInputWithCountry control={control} id="phoneNumber"
-                                                   value={phoneInput} onChange={setPhoneInput}
-                                                   name="phoneNumber" disabled={isPending || isEditSession}
-                                                   className={`${errors.phoneNumber ? 'border-rose-300' : ''} !px-4 ${styles}`}
-                                                   rules={{
-                                                       required: "This field is required",
-                                                       validate: (value) => isValidPhoneNumber(value) || "Enter a valid phone number"
-                                                   }}
-                            />
+                            <PhoneInputWithCountry
+                                control={control} id="phoneNumber"
+                                value={phoneInput} onChange={setPhoneInput}
+                                name="phoneNumber" disabled={isPending || isEditSession}
+                                className={`${errors.phoneNumber ? 'border-rose-300' : ''} !px-4 ${styles}`}
+                                rules={{
+                                    required: "This field is required",
+                                    validate: (value) => isValidPhoneNumber(value) || "Enter a valid phone number"
+                            }}/>
                         </FormRow>
                     </FlexItem>
                 </FlexContainer>
@@ -145,7 +146,18 @@ function UserForm({ user = {}, setUserToEdit }) {
                     </FlexItem>
                     <FlexItem>
                         <FormRow label="Date of Birth" id="dob" error={errors.dob?.message}>
-                            <DatePicker disabled={isPending || isEditSession} id="dob" name="dob" register={register} control={control}
+                            <DatePicker disabled={isPending || isEditSession}
+                                        id="dob" name="dob"
+                                        register={register}
+                                        validate={(value) => {
+                                            const invalidDob = isFuture(new Date(value));
+                                            const ageLimitYear = subYears(new Date(), 17);
+                                            const underAge = isAfter(new Date(value), ageLimitYear);
+
+                                            return invalidDob ? "Birth Date cannot be in the future" :
+                                                underAge ? "User must be at least 17 years old" : true;
+                                        }}
+                                        control={control}
                                         error/>
                         </FormRow>
                     </FlexItem>
@@ -212,7 +224,7 @@ function UserForm({ user = {}, setUserToEdit }) {
                                         className={`${errors.gender ? 'border-rose-300' : ''} ${selectStyles} px-4`}
                                         {...register("role")}>
 
-                                    {roles?.filter(role => role.roleName === "user" || role.roleName === "member").map((role) => (
+                                    {roles?.map((role) => (
                                         <option key={role.id} value={role.roleName}
                                                 className="text-body dark:text-bodydark">{role.roleName}</option>
                                     ))}

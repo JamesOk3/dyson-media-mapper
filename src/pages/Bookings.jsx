@@ -5,7 +5,7 @@ import {Outlet} from "react-router-dom";
 function Bookings() {
     return (
         <>
-            <Breadcrumb pageName="Bookings" />
+            <Breadcrumb pageName="Product Requests" />
             <Outlet />
 
         </>

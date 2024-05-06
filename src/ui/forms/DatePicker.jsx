@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import 'flatpickr/dist/flatpickr.min.css';
 import flatpickr from 'flatpickr';
 import Icons from "../Icons.jsx";
+import {isAfter, isFuture, subYears} from "date-fns";
 
 /**
  * Initializes the flatpickr date picker for the date input field.
@@ -12,7 +13,7 @@ import Icons from "../Icons.jsx";
  * Date: April 1, 2024,
  * Copyright (C) 2024 Newcastle University, UK
  */
-function DatePicker({id, name, register}) {
+function DatePicker({id, name, register, validate}) {
 
     useEffect(() => {
         // Init flatpickr
@@ -36,8 +37,9 @@ function DatePicker({id, name, register}) {
                     placeholder="dd/mm/yyyy"
                        id={id} name={name}
                     data-class="flatpickr-right"
-                       {...register(name, {required: "This field is required"})}
-                />
+                       {...register(name, {required: "This field is required",
+                       validate: validate}
+                       )}/>
 
                 <div className="pointer-events-none absolute inset-0 left-4 flex items-center">
                     <Icons id="calendar" className="fill-current" />

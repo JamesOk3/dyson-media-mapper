@@ -136,6 +136,16 @@ export async function getAllUsers() {
     if(error) throw new Error("Could not fetch users");
     return data;
 }
+export async function getUserById(id) {
+
+    const {data, error} = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', id)
+        .single();
+    if(error) throw new Error(error.message);
+    return data;
+}
 
 /**
  * Update user information including password, first name, last name, phone number, date of birth,

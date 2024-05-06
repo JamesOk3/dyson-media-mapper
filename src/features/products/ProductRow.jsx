@@ -2,6 +2,7 @@ import {useDeleteProduct} from "./hooks/useDeleteProduct.js";
 import Table from "../../ui/tables/Table.jsx";
 import ProductForm from "./ProductForm.jsx";
 import ActionMenu from "../../ui/modals/ActionMenu.jsx";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Function component for rendering a row in the product table.
@@ -18,6 +19,7 @@ import ActionMenu from "../../ui/modals/ActionMenu.jsx";
 
 function ProductRow({product, editProduct, setEditProduct}) {
     const { isDeleting, deleteProduct} = useDeleteProduct();
+    const navigate = useNavigate();
 
     function handleProductEdit() {
         // setShowEditForm(!showEditForm);
@@ -25,6 +27,10 @@ function ProductRow({product, editProduct, setEditProduct}) {
     }
 
     const { id, name, photo, price, quantity, status } = product;
+
+    function handleProductView() {
+        navigate(`/products/product-details/${id}`);
+    }
 
     return (
         <>
@@ -44,6 +50,7 @@ function ProductRow({product, editProduct, setEditProduct}) {
                 <Table.Tdata tdataStyles="justify-center">
                     <ActionMenu
                         id={id}
+                        onView={handleProductView}
                         onEdit={handleProductEdit}
                         onDelete={deleteProduct}
                         isDeleting={isDeleting}

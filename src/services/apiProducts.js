@@ -53,6 +53,15 @@ export async function addUpdateProduct(newProduct, id) {
 
     return data;
 }
+export async function updateProductQuantity({id, quantity}) {
+    const { data, error } = await supabase
+        .from("products")
+        .update({quantity})
+        .eq("id", id)
+        .select();
+    if(error) throw new Error("Could not update product quantity");
+    return data;
+}
 
 /**
  * Retrieves all products from the database.
@@ -69,6 +78,17 @@ export async function getProducts() {
     const { data, error } = await supabase.from("products").select("*");
 
     if(error) throw new Error("Could not fetch products");
+    return data;
+}
+
+export async function getProductById(id) {
+    const { data, error } = await supabase
+        .from("products")
+        .select("*, category: product_categories(id, categoryName)")
+        .eq("id", id)
+        .single();
+    console.log(error);
+    if(error) throw new Error("Could not fetch product");
     return data;
 }
 

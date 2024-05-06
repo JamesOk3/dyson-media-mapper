@@ -17,6 +17,7 @@ import Row from "../../ui/containers/Row.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetAllTeams} from "../teams/hooks/useGetAllTeams.js";
 import {useGetEvent} from "./hooks/useGetEvent.js";
+import {isAfter} from "date-fns";
 
 // const teams1 = ['Team 1', 'Team 2', 'Team 3', 'Team 4'];
 /**
@@ -34,7 +35,6 @@ function EventForm() {
     const navigate = useNavigate();
     const {isFetchingEvent, event} = useGetEvent();
     const {eventId: evId} = useParams();
-    console.log(evId, event);
 
     const {id: eventId, ...eventValues} = event || {};
     const isEditSession = Boolean(eventId);
@@ -95,7 +95,10 @@ function EventForm() {
                         <FlexItem>
                             <FormRow label="Event Date" id="eventDate" error={errors.eventDate?.message}
                                      icon={<Icons id="calendar" />}>
-                                <DatePicker id="eventDate" name="eventDate" register={register} control={control}/>
+                                <DatePicker id="eventDate" name="eventDate"
+                                            register={register}
+                                            validate={(value) => isAfter(new Date(value), new Date()) || "Date must be in the future"}
+                                            control={control}/>
                             </FormRow>
                         </FlexItem>
                         <FlexItem>
@@ -162,7 +165,13 @@ function EventForm() {
                     </GeneralContainer>
 
                     <ButtonGroup>
-                        <Button disabled={isWorking} type="reset" variation="secondary" size="small">Cancel</Button>
+                        <Button disabled={isWorking} type="reset" variation="secondary" size="small"
+                            onClick={(e) => {
+                            e.preventDefault();
+                            navigate(-1);
+                        }}>
+                            Cancel
+                        </Button>
                         <Button disabled={isWorking} size="small" type="submit" variation="primary">
                             {isWorking ? <SpinnerMin label="Saving..."/> : (`${isEditSession ? 'Update' : 'Add'} Event`) }
                         </Button>

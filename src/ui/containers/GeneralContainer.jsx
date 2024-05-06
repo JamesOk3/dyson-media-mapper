@@ -11,7 +11,7 @@
  * Copyright (C) 2024 Newcastle University, UK
  */
 function GeneralContainer({children, className}) {
-    const styles = `p-7 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${className ? className : ''}`
+    const styles = `p-4 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${className ? className : ''}`
 
 
     return (

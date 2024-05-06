@@ -114,7 +114,6 @@ export async function getAssignedEventsByTeam(teamId) {
         .from("events")
         .select("*")
         .eq("assignedTeam", teamId)
-    console.log(error);
     if(error) throw new Error("Could not fetch events");
     return data;
 }

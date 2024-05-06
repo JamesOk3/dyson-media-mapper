@@ -21,7 +21,7 @@ function EventItem({event, isFetching}) {
     if (isFetching) return <Spinner />
 
     return (
-        <div className="space-y-8 sm:space-y-5 my-6 lg:mb-0">
+        <div className="space-y-8 sm:space-y-5 my-2 lg:mb-0">
 
             <article
                 className="flex bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">

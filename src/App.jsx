@@ -34,6 +34,7 @@ import ResetPassword from "./features/auth/ResetPassword.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 import EventDetails from "./features/events/EventDetails.jsx";
+import ProductDetails from "./features/bookings/ProductDetails.jsx";
 
 /**
  * Renders the main application component.
@@ -78,6 +79,7 @@ function App() {
                             <Route index element={<Navigate to="stock" />} />
                             <Route path="stock" element={<Stock />} />
                             <Route path="add-product" element={<AddProduct />} />
+                            <Route path="product-details/:productId" element={<ProductDetails />} />
                             <Route path="categories" element={<Categories />} />
                         </Route>
                         <Route path="/events" element={<Events />} >

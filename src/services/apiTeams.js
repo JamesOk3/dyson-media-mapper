@@ -52,6 +52,15 @@ export async function getTeamById(id) {
     return data;
 }
 
+export async function getTeamByLeader(leaderId) {
+    const { data, error } = await supabase
+        .from('teams')
+        .select("*")
+        .eq('leader', leaderId);
+    if(error) throw new Error("Could not fetch team");
+    return data[0];
+}
+
 export async function deleteTeam(id) {
     const { data, error } = await supabase
         .from('teams')

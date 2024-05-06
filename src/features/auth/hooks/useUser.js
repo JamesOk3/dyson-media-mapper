@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
-import {getCurrentUser} from "../../../services/apiAuth.js";
+import {getCurrentUser, getUserById} from "../../../services/apiAuth.js";
 import {useAppRole} from "./useAppRole.js";
+import app from "../../../App.jsx";
 
 /**
  * Custom hook for managing user session.
@@ -14,14 +15,19 @@ import {useAppRole} from "./useAppRole.js";
  */
 
 export function useUser() {
-    const {user: user2} = useAppRole();
+    // const {user: user2} = useAppRole();
     // const appRole = user2?.appRole;
 
     const {isPending, data: user} = useQuery({
         queryKey: ["user"],
         queryFn: getCurrentUser,
     });
-    const appRole = user?.user_metadata.role.toLowerCase();
+    const {data: user2} = useQuery({
+        queryKey: ["role"],
+        queryFn: () => getUserById(user?.id),
+    });
+    // const appRole = user?.user_metadata.role?.toLowerCase();
+    const appRole = user2?.role?.toLowerCase();
 
     return {isPending,  user, appRole, isAuthenticated: user?.role === "authenticated"};
 }

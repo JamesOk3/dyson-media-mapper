@@ -60,24 +60,25 @@ function TeamList({leader, members, team, active, handleToggle, onCloseModal }) 
                 active === teamId ? 'block' : 'hidden'}`} >
                 <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
-                    <main className="grow">
-                        <div className="px-4 sm:px-6 lg:px-8 py-8 w-full">
-                            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:space-x-8 xl:space-x-16">
+                    <section className="p-4">
+                        {/*<div className="px-4 sm:px-6 lg:px-8 py-8 w-full">*/}
+                            <div className="max-w-7xl mx-auto flex flex-col justify-between xl:flex-row">
                                 <div>
-
                                     <div className="mb-4">
-                                        <h2 className="text-xl leading-snug  text-indigo-500 dark:text-slate-100 font-bold mb-2">Team Leader</h2>
+                                        <h2 className="text-xl leading-snug  text-indigo-500 dark:text-slate-100 font-bold mb-2">Team
+                                            Leader</h2>
 
                                         {!leaderExists ? (
                                             <Modal>
                                                 <Modal.Open opens="leader-form">
-                                                    <button className="text-indigo-600 hover:underline hover:text-primary">
+                                                    <button
+                                                        className="text-indigo-600 hover:underline hover:text-primary">
                                                         Assign Leader
                                                     </button>
                                                 </Modal.Open>
                                                 <Modal.Window name="leader-form">
                                                     {!users ? <p>The team has no members</p> :
-                                                        <LeaderForm onClick={onCloseModal} team={team}  />
+                                                        <LeaderForm onClick={onCloseModal} team={team}/>
                                                     }
                                                 </Modal.Window>
                                             </Modal>
@@ -100,39 +101,25 @@ function TeamList({leader, members, team, active, handleToggle, onCloseModal }) 
                                     </div>
 
                                     {leaderExists && (
-                                        <div>
-                                            <div className="font-medium mb-6">
-                                                <p>{`${leader?.postcode}, ${leader?.city}`}</p>
-                                                <p>{leader?.phonenumber}</p>
-                                                <p>{leader?.email}</p>
+                                        <div className="font-medium mb-6">
+                                            <p>{`${leader?.postcode}, ${leader?.city}`}</p>
+                                            <p>{leader?.phonenumber}</p>
+                                            <p>{leader?.email}</p>
 
-                                            </div>
                                         </div>
                                     )}
-
-                                    <hr className="my-6 border-t border-slate-200 dark:border-slate-700"/>
-
-                                    <div>
-                                        <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">Assigned Events</h2>
-                                        {!teamEvents?.length ? <p>No events assigned</p> : (
-                                            teamEvents?.map((event) => (
-                                                <EventItem key={event.id} event={event} isFetching={isFetching} />
-                                            ))
-                                        )}
-
-                                    </div>
-
 
                                 </div>
 
                                 {/* Sidebar */}
                                 <div className="space-y-4">
                                     <div
-                                        className="bg-white dark:bg-slate-800 p-5 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700  xl:w-100">
+                                        className="bg-white dark:bg-slate-800 p-5 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 xl:w-100">
                                         <div className="space-y-2">
                                             <Modal>
                                                 <Modal.Open opens="users">
-                                                    <button className="btn w-full bg-indigo-500 hover:bg-indigo-600 text-white">
+                                                    <button
+                                                        className="btn w-full bg-indigo-500 hover:bg-indigo-600 text-white">
                                                         <Icons id="plus" className="w-4 h-4 fill-current shrink-0"/>
                                                         <span className="ml-1">Add Member</span>
                                                     </button>
@@ -153,7 +140,7 @@ function TeamList({leader, members, team, active, handleToggle, onCloseModal }) 
                                     </div>
 
                                     <div
-                                        className="bg-white dark:bg-slate-800 p-5 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700  xl:w-100">
+                                        className="bg-white dark:bg-slate-800 p-5 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 xl:w-100">
                                         <div className="flex justify-between space-x-1 mb-5">
                                             <div className="text-sm text-slate-800 dark:text-slate-100 font-semibold">
                                                 Team Members
@@ -166,17 +153,33 @@ function TeamList({leader, members, team, active, handleToggle, onCloseModal }) 
                                         </div>
                                         <ul className="space-y-3">
                                             {members.map((member, index) => (
-                                                <ListItem2 key={index} image={member?.avatar || defaultUser} content={`${member?.firstname} ${member?.lastname}`}/>
+                                                <ListItem2 key={index} image={member?.avatar || defaultUser}
+                                                           content={`${member?.firstname} ${member?.lastname}`}/>
                                             ))
                                             }
                                         </ul>
                                     </div>
 
-
                                 </div>
                             </div>
+                        {/*</div>*/}
+                    </section>
+                    <hr className="my-6 border-t border-slate-200 dark:border-slate-700"/>
+
+                    <section className="p-2 max-w-7xl mx-auto">
+
+                        <h2 className="text-xl leading-snug text-slate-800 dark:text-slate-100 font-bold mb-2">Assigned
+                            Events</h2>
+                        <div className="grid gap-2 sm:grid-cols-2 sm:gap-8">
+
+                            {!teamEvents?.length ? <p>No events assigned</p> : (
+                                teamEvents?.map((event) => (
+                                    <EventItem key={event.id} event={event} isFetching={isFetching}/>
+                                ))
+                            )}
+
                         </div>
-                    </main>
+                    </section>
                 </div>
             </div>
         </div>
