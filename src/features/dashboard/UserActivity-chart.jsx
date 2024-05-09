@@ -1,5 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+/**
+ * A function that represents the proportion of users (Registered vs Guests) that visit per month
+ *
+ * @return {JSX.Element} This component which will be used in the Dashboard page and will display a pie graph for authorized users
+ *
+ * @author Hiruy Alemseged
+ * Date: May 3rd, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function UserActivityChart() {
   const chartRef = useRef(null);
@@ -18,7 +27,7 @@ function UserActivityChart() {
         
         chartInstanceRef.current.data.labels = data.labels.map((label, index) => `${label}: ${data.values[index]}%`);
         chartInstanceRef.current.data.datasets[0].data = data.values;
-        chartInstanceRef.current.update();
+       
       } else {
        
         chartInstanceRef.current = new Chart(ctx, {

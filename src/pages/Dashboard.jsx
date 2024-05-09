@@ -3,6 +3,15 @@ import ProductRequests from "../ui/Cards/ProductRequests";
 import UserActivityChart from "../features/dashboard/UserActivity-chart";
 import MonthlyUsersChart from "../features/dashboard/MonthlyUsers-chart";
 import UpcomingEventChart from "../features/dashboard/UpcomingEvent-chart";
+/**
+ * A function that renders the Dashboard for users .
+ *
+ * @return {JSX.Element} This component will strictly be used for the Dashboard
+ *
+ * @author Hiruy Alemseged
+ * Date: April 3rd, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function Dashboard() {
     return (
@@ -27,7 +36,7 @@ function Dashboard() {
     
                              <div className="flex justify-between gap-14">
 
-  <div className="w-1/2 bg-purple-100 shadow-xl">
+  <div className="w-1/2 bg-purple-100 shadow-2xl">
   <Link to="/Bookings/"  className="inline-flex text-slate-800 dark:text-slate-100 hover:text-slate-900 dark:hover:text-white mb-1">
     <h3 className="bg-blue-400 text-white py-3 px-6 rounded-none uppercase font-medium shadow-lg transition duration-300 ease-in-out hover:bg-purple-00 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">Product Requests</h3>
     </Link>
@@ -35,7 +44,7 @@ function Dashboard() {
   </div>
 
  
-  <div className="w-1/2 bg-purple-100 shadow-xl">
+  <div className="w-1/2 bg-purple-100 shadow-2xl">
   <Link to="/Events/"  className="inline-flex text-slate-800 dark:text-slate-100 hover:text-slate-900 dark:hover:text-white mb-1">
     <h3 className="bg-blue-400 text-white py-3 px-6 rounded-none uppercase font-medium shadow-lg transition duration-300 ease-in-out hover:bg-purple-00 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">Upcoming Events</h3>
     </Link>
@@ -46,10 +55,10 @@ function Dashboard() {
                     </div>
                     <div className="flex justify-between gap-12  mt-8">
                        
-        <div className="w-1/2   bg-purple-100 dark-purple-100 shadow-xl">
+        <div className="w-1/2   bg-purple-100 dark-purple-100 shadow-2xl">
           <UserActivityChart />
         </div>
-        <div className="w-1/2   bg-purple-100 shadow-xl ">
+        <div className="w-1/2   bg-purple-100 shadow-2xl ">
           <MonthlyUsersChart />
         </div>
       </div>
