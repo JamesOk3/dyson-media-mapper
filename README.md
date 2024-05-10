@@ -1,4 +1,7 @@
-# Dyson Media Mapper Web 
+# Dyson Media Mapper Web App
+* Team 2 - May 10, 2024
+This is a group project assignment submitted as part of coursework assessment for 
+Software Engineering and Team project (CSC8019) course at Newcastle University.
 
 ## Running the project into your local machine
 * Ensure your PC has Node.js v20 or higher installed
