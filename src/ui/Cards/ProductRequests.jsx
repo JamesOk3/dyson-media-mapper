@@ -1,4 +1,17 @@
 import { Link } from "react-router-dom";
+/**
+ * Renders an event card component with details like city, date, content, title, tag, id, and time.
+ *
+ * @param {string} User - The user requesting a product.
+ * @param {string} Product - The title of product being requested.
+ * @param {string} id - The unique ID of the Product.
+ * @param {Object} Date -the date the user requested the product.
+ * @return {JSX.Element} The rendered Product Request Card.
+ *
+ * @author Hiruy Alemseged
+ * Date: May 3rd, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function ProductRequests() {
   const productRequests = [

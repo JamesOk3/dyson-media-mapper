@@ -1,5 +1,14 @@
 import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+/**
+ * A function that represents the increase of users on the platform per month.
+ *
+ * @return {JSX.Element} This component which will be used in the Dashboard page and will display a line graph for authorized users
+ *
+ * @author Hiruy Alemseged
+ * Date: May 3rd, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function MonthlyUsersChart() {
   const chartRef = useRef(null);
@@ -17,7 +26,6 @@ function MonthlyUsersChart() {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.data.labels = data.labels;
         chartInstanceRef.current.data.datasets[0].data = data.values;
-        chartInstanceRef.current.update();
       } else {
         chartInstanceRef.current = new Chart(ctx, {
           type: 'line', 

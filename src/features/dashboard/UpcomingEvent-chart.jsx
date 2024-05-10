@@ -1,4 +1,16 @@
 import { Link } from "react-router-dom";
+/**
+ * A function that creates an upcoming event chart to be dislayed on the Dashboard for authorized users 
+ * @param {string} title - The title of the event
+ * @param {string} Location - The tag associated with the location
+ * @param {string} id - The unique identifier of the event.
+ * @param {string} Date- The string containing the date of the event 
+ * @return {JSX.Element} The upcoming event chart.
+ *
+ * @author Hiruy Alemseged
+ * Date: May 3rd, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 function UpcomingEventChart() {
   const upcomingEvents = [
@@ -20,7 +32,7 @@ function UpcomingEventChart() {
                 </div>
               </header>
               <footer className="mt-auto p-2">
-                {/* Hey James, I used the links you used for other components but if you could corrent the location of the links I would appreciate it */}
+                
                 <Link className="text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400"
                   to={`/events/event-details/${index}`}>More Details &rarr;</Link>
               </footer>
