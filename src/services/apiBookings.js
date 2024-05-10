@@ -1,5 +1,17 @@
 import supabase from "./supabase.js";
 
+/**
+ * Creates or updates a booking in the database.
+ *
+ * @param {Object} booking - The booking object to be created or updated.
+ * @return {Promise<Object>} The created or updated booking data.
+ * @throws {Error} If there is an error creating or updating the booking.
+ *
+ * @author James M Kambanga
+ * Date: May 5, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
+
 export async function createUpdateBooking(booking) {
     const { data, error } = await supabase
         .from("bookings")
@@ -8,6 +20,16 @@ export async function createUpdateBooking(booking) {
     return data;
 }
 
+/**
+ * Retrieves all product requests from the database.
+ *
+ * @return {Promise<Object>} An object containing the product requests data.
+ * @throws {Error} If there is an error fetching the product requests.
+ *
+ * @author James M Kambanga
+ * Date: May 6, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getAllProductRequests() {
     const { data, error } = await supabase
         .from("bookings")

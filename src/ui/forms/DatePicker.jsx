@@ -2,7 +2,6 @@ import {useEffect} from 'react';
 import 'flatpickr/dist/flatpickr.min.css';
 import flatpickr from 'flatpickr';
 import Icons from "../Icons.jsx";
-import {isAfter, isFuture, subYears} from "date-fns";
 
 /**
  * Initializes the flatpickr date picker for the date input field.

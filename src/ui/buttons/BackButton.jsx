@@ -1,6 +1,15 @@
 import Icons from "../Icons.jsx";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * Renders a back button component that navigates to the previous page when clicked.
+ *
+ * @return {JSX.Element} The rendered back button component.
+ *
+ * @author James M Kambanga
+ * Date: April 19, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 function BackButton() {
     const navigate = useNavigate();
     return (

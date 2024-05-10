@@ -28,18 +28,6 @@ export function useAppRole() {
         }
 
         supabase.auth.getSession().then(({ data: { session } }) => saveSession(session))
-
-       /* const { subscription: authListener } = supabase.auth.onAuthStateChange(
-            async (event, session) => {
-                console.log(event, session)
-
-                saveSession(session)
-            }
-        )*/
-
-       /* return () => {
-            authListener.unsubscribe()
-        }*/
     }, [])
 
     return {session, user};

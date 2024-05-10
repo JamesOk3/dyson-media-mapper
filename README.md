@@ -1,23 +1,38 @@
-# Dyson Media Mapper Web Application
+# Dyson Media Mapper Web 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Running the project into your local machine
+* Ensure your PC has Node.js v20 or higher installed
+* Unzip the project folder
+* Open the project folder in command or any IDE 
+* Install the required dependencies by running the following command: npm install
+* Type the following command to run the application: npm run dev
+* Copy the url shown and paste it to your browser to open the application
 
-Currently, two official plugins are available:
+Note: The application uses the online database, so you'll need to be connected to the internet to be able to access it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## **Testing Accounts:**
+Admin: 
+Email: admin@example.com
+Password: team2024
+Team Leader:
+Email: htr@exmple.com
+Password: 12345678
+Team Member: 
+Email: cindy@987.com
+Password: team2024
+
 
 ## Libraries and Packages
-
 Frontend Library: React 18.2.0
 Styling: Tailwind CSS 3.4.1
 Error Boundaries (error when rendering components): react-error-boundary
-Date Picker: npm i flatpickr --save
-npm install react-hot-toast
-npm i react-hook-form
-npm install date-fns --save
+Date Picker: flatpickr
+Notification:  react-hot-toast
+Form:  react-hook-form
+Dates:  date-fns
+Remote State Management: TanStack/React Query Library
+Testing: React Testing Library
 
-supabase client: npm install @supabase/supabase-js
 
 ## Project Structure
 

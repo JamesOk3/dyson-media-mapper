@@ -87,6 +87,16 @@ export async function getEvent(id) {
     return data[0];
 }
 
+/**
+ * Retrieves all unassigned events from the "events" table in the database.
+ *
+ * @return {Promise<Array>} An array of unassigned event objects.
+ * @throws {Error} If the operation fails.
+ *
+ * @author James M Kambanga
+ * Date: April 30, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getUnassignedEvents() {
     const { data, error } = await supabase
         .from("events")
@@ -96,6 +106,16 @@ export async function getUnassignedEvents() {
     return data;
 }
 
+/**
+ * Retrieves all assigned events from the "events" table in the database.
+ *
+ * @return {Promise<Array>} An array of assigned event objects.
+ * @throws {Error} If the operation fails.
+ *
+ * @author James M Kambanga
+ * Date: April 30, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getAssignedEvents() {
     const { data, error } = await supabase
         .from("events")
@@ -105,6 +125,16 @@ export async function getAssignedEvents() {
     return data;
 }
 
+/**
+ * Retrieves assigned events based on the provided teamId.
+ *
+ * @param {string} teamId - The ID of the team to retrieve assigned events for.
+ * @return {Promise<Array>} An array of assigned event objects.
+ *
+ * @author James M Kambanga
+ * Date: May 9, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 export async function getAssignedEventsByTeam(teamId) {
     // if (!teamId) return [];
 
@@ -115,6 +145,17 @@ export async function getAssignedEventsByTeam(teamId) {
     if(error) throw new Error("Could not fetch events");
     return data;
 }
+
+/**
+ * Retrieves assigned events based on the provided user ID.
+ *
+ * @param {string} userId - The ID of the user to retrieve assigned events for.
+ * @return {Promise<Array>} An array of assigned event objects.
+ *
+ * @author James M Kambanga
+ * Date: May 9, 2024,
+ * Copyright (C) 2024 Newcastle University, UK
+ */
 
 export async function getAssignedEventsByUser(userId) {
     // fetch team id

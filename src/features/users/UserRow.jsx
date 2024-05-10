@@ -1,7 +1,6 @@
 import Table from "../../ui/tables/Table.jsx";
 import ActionMenu from "../../ui/modals/ActionMenu.jsx"
 import defaultUser from "../../images/user/default-user.jpeg";
-import ProductForm from "../products/ProductForm.jsx";
 import UserForm from "./UserForm.jsx";
 
 /**

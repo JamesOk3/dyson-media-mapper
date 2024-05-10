@@ -1,7 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import {getCurrentUser, getUserById} from "../../../services/apiAuth.js";
-import {useAppRole} from "./useAppRole.js";
-import app from "../../../App.jsx";
+
 
 /**
  * Custom hook for managing user session.

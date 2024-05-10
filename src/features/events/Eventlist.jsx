@@ -11,7 +11,7 @@ import FormRow from '../../ui/forms/FormRow.jsx';
  * Copyright (C) 2024 Newcastle University, UK
  */
 
-       function EventList() {
+function EventList() {
     const upcomingEvents = [
         { ID: "DYS29874", Event: "Dyson Product Fair", Date: "03/04/2024" },
         { ID: "DYS89373", Event: "Newcastle University", Date: "14/04/2024" },
