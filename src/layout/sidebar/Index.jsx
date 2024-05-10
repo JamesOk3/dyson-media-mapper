@@ -276,7 +276,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                 <div className={`translate transform overflow-hidden ${!open && "hidden"}`}>
                                                     <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                                                         <li>
-                                                            <NavLink to="/reports/general-reports"
+                                                            <NavLink to="/reports/customer-reports"
                                                                 className={({isActive}) =>
                                                                     "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
                                                                     (isActive && "!text-white")}>General Reports
@@ -284,21 +284,21 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                         </li>
 
                                                         <li>
-                                                            <NavLink to="/reports/products-statistics"
+                                                            <NavLink to="/reports/event-reports"
                                                                      className={({isActive}) =>
                                                                          "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
                                                                          (isActive && "!text-white")}>Product Reports
                                                             </NavLink>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/reports/customers-statistics"
+                                                            <NavLink to="/reports/product-reports"
                                                                 className={({isActive}) =>
                                                                     "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
                                                                     (isActive && "!text-white")}>Customer Reports
                                                             </NavLink>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/reports/teams-statistics"
+                                                            <NavLink to="/reports/team-reports"
                                                                 className={({isActive}) =>
                                                                     "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
                                                                     (isActive && "!text-white")}>Teams Reports

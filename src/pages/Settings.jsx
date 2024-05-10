@@ -21,14 +21,10 @@ function Settings() {
       <article className="flex flex-col p-12 bg-white-300">
         <header className="mb-6">
           <div className="font-medium">
-            <h3 className="text-2xl leading-tight font-semibold">Forgot Password?</h3>
+            <h3 className="text-2xl leading-tight font-semibold">This Feature is under development</h3>
           </div>
         </header>
-        <p className="text-base text-gray-400 italic"> No worries, you can change your password below!</p>
-        <footer className="mt-auto pt-6">
-          <Link className="text-base font-medium text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400"
-            to="/reset-password">Reset Password! &rarr;</Link>
-        </footer>
+        <p className="text-base text-gray-400 italic"> Comming Soon</p>
       </article>
     </div>
   </div>

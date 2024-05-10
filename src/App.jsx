@@ -101,11 +101,11 @@ function App() {
                             <Route path="create-user" element={<CreateUser />} />
                         </Route>
                         <Route path="/guests" element={<Guests />} />
-                        <Route path="/reports" element={<Navigate to="general-reports" />} >
-                            <Route path="general-reports" element={<EventReports />} />
-                            <Route path="products-statistics" element={<ProductReports />} />
-                            <Route path="customers-statistics" element={<CustomerReports />} />
-                            <Route path="teams-statistics" element={<TeamReports />} />
+                        <Route path="/reports" element={<Navigate to="event-reports" />} >
+                            <Route path="event-reports" element={<EventReports />} />
+                            <Route path="product-reports" element={<ProductReports />} />
+                            <Route path="customer-reports" element={<CustomerReports />} />
+                            <Route path="team-reports" element={<TeamReports />} />
                         </Route>
                         <Route path="account" element={<Account />} />
                         <Route path="/settings" element={<Settings />} >
