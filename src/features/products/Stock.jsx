@@ -10,6 +10,7 @@ import Empty from "../../ui/Empty.jsx";
 import Table from "../../ui/tables/Table.jsx";
 import ProductRow from "./ProductRow.jsx";
 import {useState} from "react";
+import {useUser} from "../auth/hooks/useUser.js";
 
 /**
  * Function component for displaying the list of products.
@@ -22,6 +23,7 @@ import {useState} from "react";
  */
 
 function Stock() {
+    const {appRole, user } = useUser();
     const [editProduct, setEditProduct] = useState("");
     const navigate = useNavigate();
 
@@ -33,10 +35,13 @@ function Stock() {
 
     return (
         <GeneralContainer>
-            <ButtonGroup>
-                <MinSearchBar />
-                <AddButton label="Add Product" onClick={() => navigate("/products/add-product")} />
-            </ButtonGroup>
+            {appRole === "admin" &&
+                <ButtonGroup>
+                    <MinSearchBar />
+                    <AddButton label="Add Product" onClick={() => navigate("/products/add-product")} />
+                </ButtonGroup>
+            }
+
             <Heading title="Products Stock" />
 
             <Table cols="75%_25%" smCols="40%_20%_25%_15%" xlCols="40%_15%_15%_20%_10%" >

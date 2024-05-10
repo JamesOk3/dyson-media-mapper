@@ -70,7 +70,7 @@ function UpdateUserForm() {
                                  icon={<Icons id="envelope" width="20" height="20" viewBox="0 0 20 20"/>}>
                             <input type="email" name="email" id="email"
                                    disabled
-                                   className={`${errors.email ? 'border-rose-300' : ''} ${styles} opacity-90`}
+                                   className={`${errors?.email ? 'border-rose-300' : ''} ${styles} opacity-90`}
                                    {...register("email", {
                                        required: "This field is required",
                                        pattern: {
@@ -82,21 +82,21 @@ function UpdateUserForm() {
                         </FormRow>
                         <FlexContainer>
                             <FlexItem>
-                                <FormRow label="First Name" id="firstName" error={errors.firstName?.message}
+                                <FormRow label="First Name" id="firstName" error={errors?.firstName?.message}
                                          icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
                                     <input type="text" name="firstName" id="firstName" placeholder="e.g., James"
                                            disabled={isUpdating}
-                                           className={`${errors.firstName ? 'border-rose-300' : ''} ${styles}`}
+                                           className={`${errors?.firstName ? 'border-rose-300' : ''} ${styles}`}
                                            {...register("firstName", {required: "This field is required"})}
                                     />
                                 </FormRow>
                             </FlexItem>
                             <FlexItem>
-                                <FormRow label="Last Name" id="lastName" error={errors.lastName?.message}
+                                <FormRow label="Last Name" id="lastName" error={errors?.lastName?.message}
                                          icon={<Icons id="user" width="20" height="20" viewBox="0 0 20 20"/>}>
                                     <input type="text" name="lastName" id="lastName" placeholder="e.g., Smith"
                                            disabled={isUpdating}
-                                           className={`${errors.lastName ? 'border-rose-300' : ''} ${styles}`}
+                                           className={`${errors?.lastName ? 'border-rose-300' : ''} ${styles}`}
                                            {...register("lastName", {required: "This field is required"})}
                                     />
                                 </FormRow>

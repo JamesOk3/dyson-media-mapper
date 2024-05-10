@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 
 function UserActivityChart() {
@@ -39,8 +39,8 @@ function UserActivityChart() {
   }, [data]);
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold">User Engagement Breakdown (Monthly Average)</h2>
+    <div className="h-[95%] p-4 flex flex-col items-center justify-center">
+      <h2 className="text-xl font-semibold mb-3">User Engagement Breakdown (Monthly Average)</h2>
       <canvas ref={chartRef} width={400} height={400} />
     </div>
   );

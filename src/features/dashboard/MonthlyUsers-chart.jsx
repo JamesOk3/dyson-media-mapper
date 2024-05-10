@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 
 function MonthlyUsersChart() {
@@ -37,7 +37,7 @@ function MonthlyUsersChart() {
               y: {
                 beginAtZero: false,
                 min: 5,
-                max: 20
+                max: 16
               }
             }
           }
@@ -47,7 +47,7 @@ function MonthlyUsersChart() {
   }, [data]);
 
   return (
-    <div>
+    <div className="h-[95%] p-4 flex flex-col items-center justify-center">
       <h2 className="text-xl font-semibold">Monthly User Growth (Per Month)</h2>
       <canvas ref={chartRef} width={500} height={500} />
     </div>

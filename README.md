@@ -197,7 +197,7 @@ supabase client: npm install @supabase/supabase-js
             └── MinSearchBar.jsx
             └── SearchBar.jsx
         └── 📁lists
-            └── ListItem.jsx
+            └── AdminListItem.jsx
             └── ListItem2.jsx
         └── 📁modals
             └── ActionMenu.jsx

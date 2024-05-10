@@ -11,6 +11,7 @@ import {useGetTeamById} from "../teams/hooks/useGetTeamById.js";
 import {useGetTeamEvents} from "./hooks/useGetTeamEvents.js";
 import EventItem from "./EventItem.jsx";
 import {EditButton} from "../../ui/buttons/Button.jsx";
+import {useUser} from "../auth/hooks/useUser.js";
 
 /**
  * Renders the details of an event.
@@ -22,7 +23,8 @@ import {EditButton} from "../../ui/buttons/Button.jsx";
  * Copyright (C) 2024 Newcastle University, UK
  */
 function EventDetails() {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const {appRole} = useUser();
     const {isFetchingEvent, event} = useGetEvent();
 
     const {isFetchingTeam, team} = useGetTeamById(event?.assignedTeam);
@@ -51,7 +53,7 @@ function EventDetails() {
                                 <h4 className="flex mb-2 text-left text-title-xsm font-bold text-black dark:text-white sm:text-title-md">
                                     {event.eventName}
                                     <span>
-                                        <EditButton onClick={() => navigate("edit", {replace: true})} />
+                                        {appRole === "admin" && <EditButton onClick={() => navigate("edit", {replace: true})}/>}
                                     </span>
                                 </h4>
 

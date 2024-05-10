@@ -18,15 +18,15 @@ import AdminBookingRow from "./AdminBookingRow.jsx";
  * Copyright (C) 2024 Newcastle University, UK
  */
 function AllProductRequests({sortKey = "all", title}) {
-    const {isFetching, pendingBookings} = useGetAllRequests();
+    const {isFetching, bookings: productRequests} = useGetAllRequests();
 
     if(isFetching) return <Spinner/>
-    if (!pendingBookings) return <Empty resourceName="New Requests"/>
+    if (!productRequests) return <Empty resourceName="New Requests"/>
 
     let bookings;
 
-    sortKey === "all" ? bookings = pendingBookings :
-        bookings = pendingBookings.filter((booking) => booking.status === sortKey);
+    sortKey === "all" ? bookings = productRequests :
+        bookings = productRequests.filter((booking) => booking.status === sortKey);
 
     const sortedBookings = bookings.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 

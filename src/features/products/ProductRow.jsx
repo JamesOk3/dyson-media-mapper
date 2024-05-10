@@ -3,6 +3,8 @@ import Table from "../../ui/tables/Table.jsx";
 import ProductForm from "./ProductForm.jsx";
 import ActionMenu from "../../ui/modals/ActionMenu.jsx";
 import {useNavigate} from "react-router-dom";
+import {useUser} from "../auth/hooks/useUser.js";
+import {ViewButton} from "../../ui/buttons/Button.jsx";
 
 /**
  * Function component for rendering a row in the product table.
@@ -18,6 +20,7 @@ import {useNavigate} from "react-router-dom";
  */
 
 function ProductRow({product, editProduct, setEditProduct}) {
+    const {appRole } = useUser();
     const { isDeleting, deleteProduct} = useDeleteProduct();
     const navigate = useNavigate();
 
@@ -48,13 +51,15 @@ function ProductRow({product, editProduct, setEditProduct}) {
                 <Table.Tdata tdataStyles="hidden xl:block text-center">{status}</Table.Tdata>
 
                 <Table.Tdata tdataStyles="justify-center">
-                    <ActionMenu
-                        id={id}
-                        onView={handleProductView}
-                        onEdit={handleProductEdit}
-                        onDelete={deleteProduct}
-                        isDeleting={isDeleting}
-                    />
+                    {appRole === "admin" ? (
+                        <ActionMenu id={id}
+                            onView={handleProductView}
+                            onEdit={handleProductEdit}
+                            onDelete={deleteProduct}
+                            isDeleting={isDeleting}
+                        />
+                    ) : <ViewButton onClick={handleProductView} /> }
+
                 </Table.Tdata>
 
             </Table.Row>

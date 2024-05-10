@@ -82,16 +82,20 @@ function DropDownUser (){
                             <Icons id="user" width="22" height="22" viewBox="0 0 22 22"/>My Profile
                         </Link>
                     </li>
-                    <li>
-                        <Link to="#"
-                            className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
-                            <Icons id="contact" width="22" height="22" viewBox="0 0 22 22"/>My Team
-                        </Link>
-                    </li>
+
+                    {appRole !== "admin" && (
+                        <li>
+                            <Link to="#0"
+                                  className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+                                <Icons id="contact" width="22" height="22" viewBox="0 0 22 22"/>My Team
+                            </Link>
+                        </li>
+                    )}
+
                     <li>
                         <Link to="/settings"
-                            className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
-                            <Icons id="settings" viewBox="0 0 64 64" />Account Settings
+                              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+                            <Icons id="settings" viewBox="0 0 64 64"/>Account Settings
                         </Link>
                     </li>
                 </ul>
