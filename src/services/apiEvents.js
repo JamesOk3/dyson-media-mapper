@@ -18,8 +18,6 @@ export async function addUpdateEvent(event, id) {
 
     let query = supabase.from("events");
 
-    console.log(id, event);
-
     if (!id) query = query.insert([event]);
 
     // updating existing event
@@ -116,4 +114,16 @@ export async function getAssignedEventsByTeam(teamId) {
         .eq("assignedTeam", teamId)
     if(error) throw new Error("Could not fetch events");
     return data;
+}
+
+export async function getAssignedEventsByUser(userId) {
+    // fetch team id
+    const { data: user, error } = await supabase
+        .from("profiles")
+        .select("id, teamId")
+        .eq("id", userId)
+        .single();
+    if(error) throw new Error("Could not fetch user's team");
+     if (!user.teamId) return [];
+    return getAssignedEventsByTeam(user.teamId);
 }

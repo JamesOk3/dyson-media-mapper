@@ -11,10 +11,10 @@ import {useQuery} from "@tanstack/react-query";
  * Copyright (C) 2024 Newcastle University, UK
  */
 export function useGetAllRequests() {
-    const {isPending: isFetching, data: pendingBookings, error} = useQuery({
+    const {isPending: isFetching, data: bookings, error} = useQuery({
         queryKey: ["bookings", "pending"],
         queryFn: getAllProductRequests
     });
 
-    return {isFetching, pendingBookings}
+    return {isFetching, bookings}
 }

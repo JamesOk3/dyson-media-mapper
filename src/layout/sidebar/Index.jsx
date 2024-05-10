@@ -132,7 +132,7 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                             {/* <!-- Menu Item Products --> */}
 
                             {/* <!-- Menu Item Events --> */}
-                            <SidebarLinkGroup activeCondition={pathname.includes("events")}>
+                            { appRole === "admin" && (<SidebarLinkGroup activeCondition={pathname.includes("events")}>
 
                                 {(handleClick, open) => {
                                     return (
@@ -155,27 +155,25 @@ function Sidebar ({ sidebarOpen, setSidebarOpen })  {
                                                 <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                                                     <li>
                                                         <NavLink to="/events/calendar"
-                                                            className={({isActive}) =>
-                                                                "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
-                                                                (isActive && "!text-white")}>Calendar
+                                                                 className={({isActive}) =>
+                                                                     "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
+                                                                     (isActive && "!text-white")}>Calendar
                                                         </NavLink>
                                                     </li>
-                                                    {appRole === "admin" && (
-                                                        <li>
-                                                            <NavLink to="/events/add-event"
-                                                                     className={({isActive}) =>
-                                                                         "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
-                                                                         (isActive && "!text-white")}>Add Event
-                                                            </NavLink>
-                                                        </li>
-                                                    )}
+                                                    <li>
+                                                        <NavLink to="/events/add-event"
+                                                                 className={({isActive}) =>
+                                                                     "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
+                                                                     (isActive && "!text-white")}>Add Event
+                                                        </NavLink>
+                                                    </li>
+
                                                 </ul>
                                             </div>
-                                            {/* <!-- Dropdown Menu End --> */}
                                         </React.Fragment>
                                     )
                                 }}
-                            </SidebarLinkGroup>
+                            </SidebarLinkGroup>)}
                             {/* <!-- Menu Item Events --> */}
 
                             {/* <!-- Menu Item Product Booking --> */}
