@@ -15,11 +15,9 @@ Note: The application uses the online database, so you'll need to be connected t
 
 ## **Testing Accounts:**
 Admin: 
-Email: admin@example.com
-Password: team2024
+Available upon request
 Team Leader:
-Email: htr@exmple.com
-Password: 12345678
+Available upon request
 Team Member: 
 Email: cindy@987.com
 Password: team2024
